@@ -1,0 +1,153 @@
+<template>
+  <div class="inicio container">      
+      <ModalFormulas @close="toggleModal" :modalActive="modalActive">      
+        <div class="ingresocaseta container">
+          <h1 style="color: white">Registro de formulas</h1>    
+          <form @submit.prevent="procesarFormulario">
+            <InputFormula :formula="formula"/>        
+          </form>
+        </div>      
+    </ModalFormulas>
+    <div class="boton">
+      <button title="Agregar Formula" @click="toggleModal" type="button" class="btn btnCrearCaseta"><span class="material-icons AgregarC">add</span></button>
+    </div>
+      <ListarFormulas /> 
+  </div>
+</template>
+
+<script>
+import InputFormula from '../components/InputFormula.vue'
+const shortid = require('shortid');
+import ModalFormulas from "@/components/ModalFormulas.vue";
+import { ref } from "vue";
+import { mapActions } from 'vuex'
+import ListarFormulas from '../components/ListarFormulas.vue'
+export default {
+  components: {
+    ListarFormulas, ModalFormulas, InputFormula
+  },
+  data() {
+        return {
+            formula: {                
+                nombreFormula: '',
+                etapaFormula: '',
+                sorgo: '',
+                maiz: '',
+                rolado: '',
+                pastaSoya: '',
+                soyaIntegral: '',
+                pastaCanola: '',
+                calcioGrano: '',
+                calcioMolido: '',
+                ortofosfato: '',
+                metionina: '',
+                sal: '',
+                lisina: '',
+                bicarbonato: '',
+                iniciacion: '',
+                postura: '',
+                ronozymeBlend: '',
+                pignamix: '',
+                treonina: ''
+            }
+        }        
+    },
+  methods: {
+    ...mapActions(['cargarFormulas', 'setFormulas']),
+    procesarFormulario() {
+                this.formula.id = shortid.generate()
+                this.setFormulas(this.formula)
+                this.formula = {
+                    id: '',
+                    nombreFormula: '',
+                    etapaFormula: '',
+                    sorgo: '',
+                    maiz: '',
+                    rolado: '',
+                    pastaSoya: '',
+                    soyaIntegral: '',
+                    pastaCanola: '',
+                    calcioGrano: '',
+                    calcioMolido: '',
+                    ortofosfato: '',
+                    metionina: '',
+                    sal: '',
+                    lisina: '',
+                    bicarbonato: '',
+                    iniciacion: '',
+                    postura: '',
+                    ronozymeBlend: '',
+                    pignamix: '',
+                    treonina: ''                   
+                }                
+            },
+  },
+  computed: {
+            bloquearBoton() {
+                if(this.formula.nombreFormula.trim() == "" ||
+                   this.formula.etapaFormula.trim() == "" 
+                //    ||
+                //    this.formula.sorgo.trim() == "" ||
+                //    this.formula.maiz.trim() == "" ||
+                //    this.formula.rolado.trim() == "" ||
+                //    this.formula.pastaSoya.trim() == "" ||
+                //    this.formula.soyaIntegral.trim() == "" ||
+                //    this.formula.pastaCanola.trim() == "" ||
+                //    this.formula.calcioGrano.trim() == "" ||
+                //    this.formula.calcioMolido.trim() == "" ||
+                //    this.formula.ortofosfato.trim() == "" ||
+                //    this.formula.metionina.trim() == "" ||
+                //    this.formula.sal.trim() == "" ||
+                //    this.formula.lisina.trim() == "" ||
+                //    this.formula.bicarbonato.trim() == "" ||
+                //    this.formula.iniciacion.trim() == "" ||
+                //    this.formula.postura.trim() == "" ||
+                //    this.formula.ronozymeBlend.trim() == "" ||
+                //    this.formula.pignamix.trim() == "" ||
+                //    this.formula.treonina.trim() == "" 
+                   ) {
+                    return true
+                }else{
+                    return false
+                }
+            }
+        },
+  created() {
+    this.cargarFormulas()
+  },
+    setup() {
+    const modalActive = ref(false);
+
+    const toggleModal = () => {
+      modalActive.value = !modalActive.value;
+    };
+
+    return { modalActive, toggleModal };
+  },
+}
+</script>
+
+<style scoped>
+
+.ingresocaseta{
+  padding: 10px;
+}
+.AgregarC{
+    font-size: 40px;    
+    border-radius: 50%;
+    -webkit-transition-duration: 0.4s; /* Safari */
+    transition-duration: 0.4s;
+}
+.AgregarC:hover{
+    color: black;
+    box-shadow: 0px 0px 10px #00ADB5;
+    border-radius: 35px;
+}
+
+.btnCrearCaseta:focus{
+    outline: none;
+  box-shadow: none;
+  color: #00ADB5;
+}
+
+</style>
