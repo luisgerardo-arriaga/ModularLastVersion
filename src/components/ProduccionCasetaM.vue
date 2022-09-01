@@ -30,7 +30,8 @@
       <td>{{item.semana}}</td>
       <td>{{item.huevoTotal}}</td>    
       <td>
-        <button class="btn btn-danger me-2 btn-sm buttonDelete" @click="deleteProduccionCaseta(item.id)">
+        <div id="buttons">
+            <button class="btn btn-danger me-2 btn-sm buttonDelete" @click="deleteProduccionCaseta(item.id)">
             <span class="material-icons btnDeletespan">delete</span>
         </button>
         <router-link
@@ -44,6 +45,7 @@
             >
             <span class="material-icons">edit</span>
         </router-link>
+        </div>
       </td>  
     </tr>
   </tbody>
@@ -65,16 +67,17 @@ export default {
 
 
 <style scoped>
+#buttons{
+    display:flex;
+}
 .buttonDelete{
     float: left;  
     transition: .5s;
-    z-index: 999;
     border: none;     
 }
 .buttonEdit{
     float: right;
     transition: .5s;
-    z-index: 999;
     border: none; 
 
 }

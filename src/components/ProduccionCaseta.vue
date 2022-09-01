@@ -166,8 +166,10 @@ export default {
       this.produccionDiaria.forEach(element => {
       if(element.diaRegistro == this.caseta_local.diaRegistro && 
         element.semana == this.caseta_local.semana){
-          this.ban = true
-          
+          if(this.caseta_local.id != element.id){
+            this.ban = true
+          }
+
         }
       });
       if(this.total <= 0  || this.ban){
