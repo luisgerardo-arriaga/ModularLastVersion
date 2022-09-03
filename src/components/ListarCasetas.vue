@@ -50,8 +50,8 @@ export default {
     .tarjetaCaseta:hover{
         cursor: pointer;
         box-shadow: 0px 9px 18px 7px rgba(0,0,0,0.33);
-    -webkit-box-shadow: 0px 9px 18px 7px rgba(0,0,0,0.33);
-    -moz-box-shadow: 0px 9px 18px 7px rgba(0,0,0,0.33);
+        -webkit-box-shadow: 0px 9px 18px 7px rgba(0,0,0,0.33);
+        -moz-box-shadow: 0px 9px 18px 7px rgba(0,0,0,0.33);
     }
 .tarjetaTitulo{
         border-top-left-radius: 5px;

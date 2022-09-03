@@ -91,7 +91,7 @@ export default {
 }
 
 strong{
-    color: #00ADB5;
+    color: #00adb5;
 }
 p{
     color: black;
