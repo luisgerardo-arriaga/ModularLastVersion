@@ -12,9 +12,6 @@
             </div>
         </div>
         <div class="negro">
-            <!-- <div class="alert alert-danger" v-if="error.tipo != null">
-                {{ error.mensaje }}
-            </div> -->
             <form @submit.prevent="procesarFormulario">
                 <div class="form-floating mb-3 mt-3 col-12">
                     <input required type="email" class="form-control" v-model.trim="email" id="floatingEmail" placeholder="Email" :class="[error.tipo == 'email' ? 'is-invalid' : '']">

@@ -113,6 +113,7 @@ export default {
 
                   procesarFormulario(){      
                     this.caseta_local.idCaseta = this.$route.params.id
+                    this.caseta_local.nombreCaseta = this.caseta.nombreCaseta 
                     this.caseta_local.id = shortid.generate()                    
                     //envia datos
                     this.setProduccionCasetas(this.caseta_local)
