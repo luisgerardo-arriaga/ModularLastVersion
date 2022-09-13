@@ -76,7 +76,7 @@ export default {
         fulldatetime: '',
         caseta_local: {                    
           id: '',
-          idCaseta:'',
+          idCaseta: '',
           cajas: 0,
           huevoGrande: 0,
           huevoChico: 0,
@@ -112,7 +112,8 @@ export default {
                   
 
                   procesarFormulario(){      
-                    this.caseta_local.id = shortid.generate()
+                    this.caseta_local.idCaseta = this.$route.params.id
+                    this.caseta_local.id = shortid.generate()                    
                     //envia datos
                     this.setProduccionCasetas(this.caseta_local)
 

@@ -158,7 +158,7 @@ export default {
   },
   props: {
     caseta_local: Object
-  },
+  }, 
   computed:{
     bloquearBoton() {
       this.ban = false;
@@ -166,8 +166,9 @@ export default {
       this.produccionDiaria.forEach(element => {
       if(element.diaRegistro == this.caseta_local.diaRegistro && 
         element.semana == this.caseta_local.semana){
-          this.ban = true
-          
+          if(this.caseta_local.id != element.id && this.$route.params.id == element.idCaseta ){
+            this.ban = true
+          }          
         }
       });
       if(this.total <= 0  || this.ban){
@@ -177,6 +178,7 @@ export default {
     },
     total() {            
       return this.caseta_local.huevoTotal = parseInt(this.caseta_local.cajas * 360) + parseInt(this.caseta_local.huevoGrande) + parseInt(this.caseta_local.huevoChico) + parseInt(this.caseta_local.huevoFragil) + parseInt(this.caseta_local.huevoSucio) + parseInt(this.caseta_local.huevoRoto) + parseInt(this.caseta_local.huevoBlando)
+      
     },     
     ...mapState(['produccionDiaria'])
   },
