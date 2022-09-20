@@ -1,26 +1,12 @@
 <template>
-   
     <div id="pr">
-        <!-- <section>
-  <h3>radio buttons</h3>
-  <input type="radio" v-model="selectB" value=0 name="add" >red
-  <input type="radio" v-model="selectB" value=1 name="add" >blue
-  <br />
-  <span>value: {{selectB}}</span>
-</section> -->
-        <div reg-c class="form-floating mb-3 mt-3 col-12">
-            <input required type="number" class="form-control" id="floatingNombreCaseta" placeholder="Codigoa"
-            v-model.trim="inventario.codigo">
-            <label for="floatingNombreCaseta">Codigo</label>
-        </div>
-        <div class="form-floating mb-3 mt-3">
-            <input required type="text" class="form-control" id="floatingNumeroGallinas" placeholder="Nombre del producto" v-model.trim="inventario.nomProducto">
-            <label for="floatingNumeroGallinas">Nombre del producto</label>
-        </div>
-        <div class="form-floating mb-3 mt-3 col-12">
+        <select name="color" id="color">
+            <option value="r">Rojo</option>
+        </select>
+        <!-- <div class="form-floating mb-3 mt-3 col-12">
             <input required type="number" class="form-control" id="floatingEtapaCaseta" placeholder="Cantidad" v-model.trim="inventario.cantidad">
             <label for="floatingEtapaCaseta">Cantidad</label>
-        </div>
+        </div> -->
         
         <button @click="close" class="btn col-3" type="submit" :disabled="bloquearBoton">Agregar Producto</button>
     </div>
@@ -28,18 +14,13 @@
 
 <script>
 export default {
-    data(){
-        return{
-            selectB: true
-        }
-    },
     props: {
         inventario: Object
     },
     
     computed: {
         bloquearBoton() {
-            if(this.inventario.codigo.trim() == "" || this.inventario.nomProducto.trim() == "" || this.inventario.cantidad.trim() == "" || this.inventario.cantidad <= 0) {
+            if(this.inventario.cantidad.trim() == "" || this.inventario.cantidad <= 0) {
                 return true
             }
             else{

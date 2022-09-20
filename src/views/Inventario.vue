@@ -1,33 +1,41 @@
 <template>
-
   <div class="inicio container">      
       <Modal @close="toggleModal" :modalActive="modalActive">      
         <div class="ingresocaseta container">
-          <h1 style="color: white">Registro de casetas</h1>
+          <!-- <h1 style="color: red">Registro de casetas</h1> -->
           <form id="app" @submit.prevent="procesarFormulario">
             <Input :inventario="inventario"/>
           </form>
         </div>      
     </Modal>
     <div class="boton">
-      <button title="Nuevo producto" @click="toggleModal" type="button" class="btn btnCrearCaseta"><span class="material-icons AgregarC">add</span></button>
+      <button title="Nuevo producto" @click="toggleModal" type="button" class="btn btnCrearCaseta">
+        <span class="material-icons AgregarC">add</span>
+      </button>
     </div>
   </div>
-  <tInventario/>
+
+  <div class="container">
+    <tInventario/>
+  </div>
 </template>
 
 <script>
 import Modal from "@/components/Modal.vue";
 import tInventario from "../components/TablaInventario.vue";
 import Input from "../components/InputInventario.vue";
+import InputEntradasInve from "../components/InputEntradasInve.vue";
 import { mapActions, mapState } from 'vuex'
 import { ref } from "vue";
 const shortid = require('shortid');
 
 export default {
   components: {
-    Modal, Input, tInventario,
-  },
+    Modal,
+    Input,
+    tInventario,
+    InputEntradasInve
+},
   
   data() {
     return {

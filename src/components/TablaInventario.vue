@@ -1,49 +1,31 @@
 <template>
-{{inventarios}}
-  <div class="produccioncaseta  container mt-5 ">      
-      <!-- Seccion del formulario de produccion -->
-      
-      <div class="row mt-5">
-          
-        <div class="col-sm-6 col-md-2"></div>
-        <div class="col-8">
-            <table class="table">
-                
-                <thead>
-                    
-                        <tr> 
-                            <th class="text-start" scope="row">Código</th>
-                            <td scope="col" class="text-end">Producto</td>
-                            <td scope="col" class="text-end">Cantidad/Saldo Inicial</td>
-                            <td scope="col" class="text-end">Entradas</td>
-                            <td scope="col" class="text-end">Total</td>
-                            <td scope="col" class="text-end">Salida</td>
-                            <td scope="col" class="text-end">Saldo final</td>
-                        </tr>
-                  </thead>
-
-                  <tbody>
-                      <tr>
-                            <th class="text-center" scope="row">1</th>
-                            <td class="text-center">100</td>
-                            <td class="text-center">100</td>
-                            <td class="text-center">100</td>
-                            <td class="text-center">100</td>
-                            <td class="text-center">100</td>
-                            <td class="text-center">100</td>
-                      </tr>
-                                           
-                  </tbody>
-                
-              </table>
-          </div>
-          <div class="col-2"></div>
-      </div>
-
-      
-  </div>
-</template>
-
+  <table class="table table-striped">
+    <thead>
+      <tr>
+        <th scope="col">Codigo</th>
+        <th scope="col">Producto</th>
+        <th scope="col">Saldo inicial</th>
+        <th scope="col">Entradas</th>
+        <th scope="col">Total</th>
+        <th scope="col">Salidas</th>
+        <th scope="col">Saldo actual</th> 
+      </tr>
+    </thead>
+    <tbody>
+      <tr v-for="item in inventarios" :key="item.id">
+      <!-- <tr> -->
+        <th scope="row">{{item.codigo}}</th>
+        <td>{{item.nomProducto}}</td>
+        <td>{{item.cantidad}}</td>
+        <td>10</td>
+        <td>56</td>
+        <td>30</td>
+        <td>26</td>
+      </tr>
+    </tbody>
+  </table>  
+  </template>
+  
 <script>
 import { mapActions, mapState } from 'vuex'
 
