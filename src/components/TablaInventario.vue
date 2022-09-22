@@ -17,7 +17,7 @@
         <th scope="row">{{item.codigo}}</th>
         <td>{{item.nomProducto}}</td>
         <td>{{item.cantidad}}</td>
-        <td>10</td>
+        <td>{{item.entrada}}</td>
         <td>56</td>
         <td>30</td>
         <td>26</td>

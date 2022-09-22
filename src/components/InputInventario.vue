@@ -1,12 +1,14 @@
 <template>
    <section>
-        <input type="radio" v-model="selectB" value=0 name="add" > Agregar entrada
+        <input type="radio" v-model="selectB" value = 0 name = "add" > Agregar entrada
         <br>
-        <input type="radio" v-model="selectB" value=1 name="add" > Nuevo producto
+        <input type="radio" v-model="selectB" value = 1 name = "add" > Nuevo producto
         <!-- <span>value: {{selectB}}</span> -->
     </section>
     <div id="pr">
         <div v-if="show">
+          <form id="app" @submit.prevent="procesarFormulario">
+
             <div reg-c class="form-floating mb-3 mt-3 col-12">
                 <input required type="number" class="form-control" id="floatingNombreCaseta" placeholder="Codigoa"
                 v-model.trim="inventario.codigo">
@@ -20,45 +22,80 @@
                 <input required type="number" class="form-control" id="floatingEtapaCaseta" placeholder="Cantidad" v-model.trim="inventario.cantidad">
                 <label for="floatingEtapaCaseta">Cantidad</label>
             </div>
+            <button @click="close" class="btn col-3" type="submit" :disabled="bloquearBoton">
+            Agregar Producto
+        </button>
+          </form>
+
         </div>
+        
         <div v-else>
+            <form @submit.prevent="updateInventarioIn(inventario)">
             <div id="pr">
-                <p>{{option}}</p>
+                <!-- <p>{{option}}</p> -->
+                <p>{{prueba}}</p>
                 <select v-model="option" name="color" id="color">
-                    <option v-for="item in inventarios" :key="item.id" v-bind:value="item.id">
+                    <option v-for="(item, index) in inventarios" :key="item" v-bind:value="index">
                         {{item.nomProducto}}
                     </option>
                 </select>
                 
 
                 <div class="form-floating mb-3 mt-3 col-12">
-                    <input required type="number" class="form-control" id="floatingEtapaCaseta" placeholder="Cantidad" v-model.trim="inventario.cantidad">
-                    <label for="floatingEtapaCaseta">Cantidad</label>
+                    <input required type="number" class="form-control" id="floatingEtapaCaseta" placeholder="Entrada" v-model.trim="entrada">
+                    <label for="floatingEtapaCaseta">Entrada</label>
                 </div>
             
-        <!-- <button @click="close" class="btn col-3" type="submit" :disabled="bloquearBoton">Agregar Producto</button> -->
+                 <button v-on:click="asignar" @click="close" class="btn col-3" type="submit" >Agregar Producto</button>
             </div>
-        </div>
-        <button @click="close" class="btn col-3" type="submit" :disabled="bloquearBoton">Agregar Producto</button>
+            </form>
+        </div>  
     </div>
 </template>
 
 <script>
     import { mapActions, mapState } from 'vuex'
+    const shortid = require('shortid');
 export default {
     data(){
         return{
+            entrada:'',
             selectB: null,
-            option: "",
+            option: null,
             productoN: null,
-            ban: true
+            ban: true,
+            inventario: {               
+                codigo: '',
+                nomProducto: '',
+                cantidad: '',
+                entrada: ''
+            }
         }
     },
     props: {
-        inventario: Object
+        // inventario: Object
     },
     
     computed: {
+        asignar(){
+            if(this.option!= null){
+                const x = this.option
+                this.inventario.id = this.inventarios[x].id
+                this.inventario.codigo = this.inventarios[x].codigo
+                this.inventario.nomProducto = this.inventarios[x].nomProducto
+                this.inventario.cantidad = this.inventarios[x].cantidad
+                this.inventario.entrada = parseInt(this.entrada) + parseInt(this.inventarios[x].entrada)
+            }
+        },
+        prueba(){
+            if(this.option != null){
+                const x = this.option
+                const aux = this.inventarios[x]
+                // console.log(aux)
+                return aux
+            }
+        },
+
         bloquearBoton() {
             if(this.inventario.codigo.trim() == "" || this.inventario.nomProducto.trim() == "" || this.inventario.cantidad.trim() == "" || this.inventario.cantidad <= 0) {
                 return true
@@ -75,15 +112,34 @@ export default {
                 return true
             }
         }, 
-        ...mapState(['inventarios'])
+        ...mapState(['inventarios', 'inventario'])
     }, 
     methods:{
-        ...mapActions(['deleteInventario'])
+        ...mapActions(['deleteInventario', 'updateInventarioIn', 'setInventario', 'cargarDBinventario']),
+        procesarFormulario() {
+            this.inventario.entrada = '0'
+            this.inventario.id = shortid.generate()
+            this.setInventario(this.inventario)
+            console.log(this.inventario)
+            this.inventario = {
+                id: '',
+                codigo: '',
+                nomProducto: '',
+                cantidad: '',
+                entrada: ''            
+            }                
+        },
+        created(){
+            this.cargarDBinventario()
+        },
     }
 }
 </script>
 
 <style scoped>
+p{
+    color: white;
+}
 input[type="text"], input[type="number"]{
     background-color: #252A34;
     border-top: 0;
@@ -139,4 +195,8 @@ input:-webkit-autofill:focus{
   /* transition: background-color 5000s ease-in-out 0s; */
 }
 
+option{
+    background-color: #393E46;
+    color: white;
+}
 </style>

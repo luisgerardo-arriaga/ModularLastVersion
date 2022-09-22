@@ -3,9 +3,9 @@
       <Modal @close="toggleModal" :modalActive="modalActive">      
         <div class="ingresocaseta container">
           <!-- <h1 style="color: red">Registro de casetas</h1> -->
-          <form id="app" @submit.prevent="procesarFormulario">
+          <!-- <form id="app" @submit.prevent="procesarFormulario"> -->
             <Input :inventario="inventario"/>
-          </form>
+          <!-- </form> -->
         </div>      
     </Modal>
     <div class="boton">
@@ -43,6 +43,7 @@ export default {
         codigo: '',
         nomProducto: '',
         cantidad: '',
+        entrada: ''
       }
     }        
   },
@@ -53,6 +54,7 @@ export default {
     ...mapActions(['setInventario', 'cargarDBinventario']),
     
     procesarFormulario() {
+      // this.inventario.entrada = '0'
       this.inventario.id = shortid.generate()
       this.setInventario(this.inventario)
       console.log(this.inventario)
@@ -60,7 +62,8 @@ export default {
         id: '',
         codigo: '',
         nomProducto: '',
-        cantidad: '',                  
+        cantidad: '',
+        entrada: ''            
       }                
     },
   },

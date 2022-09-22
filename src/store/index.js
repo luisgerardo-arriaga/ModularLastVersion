@@ -37,6 +37,7 @@ export default createStore({
       codigo: '',
       nomProducto: '',
       cantidad: '',
+      entrada: '',
     },
     user: null,
     error: {tipo: null, mensaje: null}
@@ -87,7 +88,11 @@ export default createStore({
       state.caseta_local = state.produccionDiaria.find(item => item.id == payload)
     },
     //Aqui Termina todo lo relacionado con la produccion de huevo diario
-
+    updateInventarioEntrada(state, payload){
+      console.log(1)
+      state.inventarios = state.inventarios.map(item => item.id == payload.id ? payload : item)
+      router.push('/inventario')
+    },
 
     setError(state, payload) {
       if(payload == null) {
@@ -189,6 +194,22 @@ export default createStore({
         console.log(error)
       }
     },
+    // #############################################################
+    async updateInventarioIn({commit, state}, inventario){
+      try {
+        const res = await fetch(`https://eggdb-5e1e1-default-rtdb.firebaseio.com/granja/inventario/${state.user.localId}/${inventario.id}.json?auth=${state.user.idToken}`,{
+          method: 'PATCH',
+          body: JSON.stringify(inventario)
+        })
+        
+        const EGGDB = await res.json()  
+        console.log(EGGDB) 
+        commit('updateInventarioEntrada', EGGDB)
+      } catch (error) {
+        console.log(error)
+      }
+    },
+    // #############################################################
     setTareaInventario({commit}, id){
       commit('inventario', id)
     },
@@ -248,9 +269,9 @@ export default createStore({
         const res = await fetch(`https://eggdb-5e1e1-default-rtdb.firebaseio.com/granja/produccion/${state.user.localId}/${caseta_local.id}.json?auth=${state.user.idToken}`,{
           method: 'PATCH',
           body: JSON.stringify(caseta_local)
-        })                
-        const EGGDB = await res.json()        
-        commit('updateProduccion', EGGDB)
+        })
+        const EGGDB = await res.json()   
+        commit('updateProduccionCaseta', EGGDB)
       } catch (error) {
         console.log(error)
       }
