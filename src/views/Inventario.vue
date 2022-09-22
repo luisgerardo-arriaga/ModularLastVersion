@@ -11,7 +11,7 @@
     <div class="boton">
       <button title="Nuevo producto" @click="toggleModal" type="button" class="btn btnCrearCaseta">
         <span class="material-icons AgregarC">add</span>
-      </button>
+      </button> 
     </div>
   </div>
 
@@ -78,6 +78,7 @@ export default {
 
     return { modalActive, toggleModal };
   },
+  
 }
 </script>
 
