@@ -172,7 +172,6 @@ export default {
           if(this.caseta_local.id != element.id && this.$route.params.id == element.idCaseta){
             this.ban = true
           }
-
         }
       });
       if(this.total <= 0  || this.ban){
