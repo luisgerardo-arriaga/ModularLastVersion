@@ -6,48 +6,52 @@
         <!-- <span>value: {{selectB}}</span> -->
     </section>
     <div id="pr">
-        <div v-if="show">
-          <form id="app" @submit.prevent="procesarFormulario">
+        <!-- div input Add producto -->
+        <div v-if="show"> 
+            <form id="app" @submit.prevent="procesarFormulario">
 
-            <div reg-c class="form-floating mb-3 mt-3 col-12">
-                <input required type="number" class="form-control" id="floatingNombreCaseta" placeholder="Codigoa"
-                v-model.trim="inventario.codigo">
-                <label for="floatingNombreCaseta">Codigo</label>
-            </div>
-            <div class="form-floating mb-3 mt-3">
-                <input required type="text" class="form-control" id="floatingNumeroGallinas" placeholder="Nombre del producto" v-model.trim="inventario.nomProducto">
-                <label for="floatingNumeroGallinas">Nombre del producto</label>
-            </div>
-            <div class="form-floating mb-3 mt-3 col-12">
-                <input required type="number" class="form-control" id="floatingEtapaCaseta" placeholder="Cantidad" v-model.trim="inventario.cantidad">
-                <label for="floatingEtapaCaseta">Cantidad</label>
-            </div>
-            <button @click="close" class="btn col-3" type="submit" :disabled="bloquearBoton">
-            Agregar Producto
-        </button>
-          </form>
-
+                <div reg-c class="form-floating mb-3 mt-3 col-12">
+                    <input required type="number" class="form-control" id="floatingNombreCaseta" placeholder="Codigoa"
+                    v-model.trim="inventario.codigo">
+                    <label for="floatingNombreCaseta">Codigo</label>
+                </div>
+                <div class="form-floating mb-3 mt-3">
+                    <input required type="text" class="form-control" id="floatingNumeroGallinas" placeholder="Nombre del producto" v-model.trim="inventario.nomProducto">
+                    <label for="floatingNumeroGallinas">Nombre del producto</label>
+                </div>
+                <div class="form-floating mb-3 mt-3 col-12">
+                    <input required type="number" class="form-control" id="floatingEtapaCaseta" placeholder="Cantidad" v-model.trim="inventario.cantidad">
+                    <label for="floatingEtapaCaseta">Cantidad</label>
+                </div>
+                <button @click="close" class="btn col-3" type="submit" :disabled="bloquearBoton">
+                    Agregar Producto
+                </button>
+            </form>
         </div>
         
         <div v-else>
             <form @submit.prevent="updateInventarioIn(inventario)">
-            <div id="pr">
-                <!-- <p>{{option}}</p> -->
-                <p>{{prueba}}</p>
-                <select v-model="option" name="color" id="color">
-                    <option v-for="(item, index) in inventarios" :key="item" v-bind:value="index">
-                        {{item.nomProducto}}
-                    </option>
-                </select>
-                
+                <div id="pr">
+                    <!-- <p>{{option}}</p> -->
+                    <!-- <p>{{prueba}}</p> -->
+                    <select v-model="option" name="color" id="color">
+                        <option value="" selected>Elije un tipo de producto</option>
+                        <option v-for="(item, index) in inventarios" :key="item" v-bind:value="index">
+                            {{item.nomProducto}}
+                        </option>
+                    </select>
+                    
 
-                <div class="form-floating mb-3 mt-3 col-12">
-                    <input required type="number" class="form-control" id="floatingEtapaCaseta" placeholder="Entrada" v-model.trim="entrada">
-                    <label for="floatingEtapaCaseta">Entrada</label>
+                    <div class="form-floating mb-3 mt-3 col-12">
+                        <input required type="number" class="form-control" id="floatingEtapaCaseta" placeholder="Entrada" v-model.trim="entrada">
+                        <label for="floatingEtapaCaseta">Entrada</label>
+                    </div>
+                
+                    <button v-on:click="asignar" @click="close" class="btn col-3" type="submit" 
+                    :disabled="bloquearBotonAddEntrada">
+                        Añadir entrada
+                    </button>
                 </div>
-            
-                 <button v-on:click="asignar" @click="close" class="btn col-3" type="submit" >Agregar Producto</button>
-            </div>
             </form>
         </div>  
     </div>
@@ -98,6 +102,14 @@ export default {
 
         bloquearBoton() {
             if(this.inventario.codigo.trim() == "" || this.inventario.nomProducto.trim() == "" || this.inventario.cantidad.trim() == "" || this.inventario.cantidad <= 0) {
+                return true
+            }
+            else{
+                return false
+            }
+        },
+        bloquearBotonAddEntrada() {
+            if(this.entrada.trim() == "" || this.entrada <= 0) {
                 return true
             }
             else{
