@@ -34,8 +34,7 @@
                 <div id="pr">
                     <!-- <p>{{option}}</p> -->
                     <!-- <p>{{prueba}}</p> -->
-                    <select v-model="option" name="color" id="color">
-                        <option value="" selected>Elije un tipo de producto</option>
+                    <select v-model="option">
                         <option v-for="(item, index) in inventarios" :key="item" v-bind:value="index">
                             {{item.nomProducto}}
                         </option>
