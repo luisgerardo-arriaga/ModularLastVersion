@@ -1,8 +1,4 @@
 <template>
-    <table class="table">
-        hola
-        
-    </table>
 <table class="table table-striped">
   <thead>
     <tr>
@@ -30,7 +26,7 @@
       <td>{{item.huevoSucio}}</td>
       <td>{{item.huevoRoto}}</td>
       <td>{{item.huevoBlando}}</td>
-      <td>{{item.diaRegistro}}</td>+
+      <td>{{item.diaRegistro}}</td>
       <td>{{item.semana}}</td>
       <td>{{item.huevoTotal}}</td>    
       <td>
