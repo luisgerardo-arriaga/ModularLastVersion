@@ -2,7 +2,7 @@
 <table class="table table-striped">
   <thead>
     <tr>
-      <th scope="col">#</th>
+      <th scope="col">Nombre de caseta</th>
       <th scope="col">Cajas de huevo</th>
       <th scope="col">Huevo grande</th>
       <th scope="col">Huevo chico</th>
