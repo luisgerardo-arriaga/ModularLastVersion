@@ -4,7 +4,7 @@
         <div class="ingresocaseta container">
           <!-- <h1 style="color: red">Registro de casetas</h1> -->
           <!-- <form id="app" @submit.prevent="procesarFormulario"> -->
-            <Input :inventario="inventario"/>
+            <Input />
           <!-- </form> -->
         </div>      
     </Modal>
