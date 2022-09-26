@@ -1,4 +1,34 @@
-<template>
+<template> 
+<div class="container text-center">
+  <div class="row align-items-start">
+    <div class="col">
+      One of three columns1      
+    </div>
+    <div class="col">
+      One of three columns2
+    </div>
+  </div>
+</div>
+    <div class="InicioC listarCasetas container ">        
+        <div class="row ">
+            <div class="col" v-for="item in casetas" :key="item.id">
+                  <div class="card col" style="max-width: 40rem; min-width: 20rem;">                      
+                      <div  class="card-header card text-white bg-dark tarjetaTitulo">
+                          <h5 class="fw-bold text-center">{{ item.nombreCaseta }}</h5>
+                      </div>      
+                      <!-- <div class="card-body tarjetaBody">                   
+                          <p class="card-text fw-bold text-start"><strong>Gallinas: </strong>{{ item.numeroGallinas }}</p>
+                          <p class="card-text fw-bold text-start"><strong>Etapa: </strong>{{ item.etapaCaseta }}</p>
+                          <p class="card-text fw-bold text-start"><strong>Encargado: </strong>{{ item.encargadoCaseta }}</p>
+                          <div class="divBotones">                              
+                              <button class="btn btnDelete btn-danger ml-2 btn-sm buttonDelete" @click="deleteCasetas(item.id)"><span class="material-icons btnDeletespan">delete</span></button>
+                              <router-link class="btn btnEdit btn-warning ml-2 btn-sm buttonEdit" :to="{name:'Editar', params:{id: item.id}}"><span class="material-icons">edit</span></router-link>
+                          </div>
+                      </div> -->
+                  </div>                   
+              </div>              
+        </div>
+    </div>
 <table class="table table-striped">
   <thead>
     <tr>
@@ -56,7 +86,7 @@
 import {mapState, mapActions} from 'vuex'
 export default {
     computed: {
-        ...mapState(['produccionDiaria'])
+        ...mapState(['produccionDiaria', 'casetas'])
     },
     methods: {
         ...mapActions(['deleteProduccionCaseta'])
@@ -95,6 +125,10 @@ strong{
 }
 p{
     color: black;
+}
+.divcontenedorT{
+    background-color: red;
+    
 }
 
 </style>
