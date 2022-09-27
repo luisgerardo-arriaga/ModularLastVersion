@@ -18,9 +18,14 @@
         <td>{{item.nomProducto}}</td>
         <td>{{item.cantidad}}</td>
         <td>{{item.entrada}}</td>
-        <td>56</td>
-        <td>30</td>
-        <td>26</td>
+        <td>{{parseInt(item.entrada) + parseInt(item.cantidad)}}</td>
+        <td>0</td>
+        <td>{{parseInt(item.entrada) + parseInt(item.cantidad) - 0}}</td>
+        <td>
+          <button class="btn btn-danger me-2 btn-sm buttonDelete" @click="deleteInventario(item.id)" >
+            <span class="material-icons btnDeletespan">delete</span>
+          </button>
+        </td>
       </tr>
     </tbody>
   </table>  
@@ -40,5 +45,13 @@ export default {
 </script>
 
 <style scoped>
-
+.buttonDelete{
+    float: left;  
+    transition: .5s;
+    border: none;     
+}
+.buttonDelete:hover{
+    color: red;  
+    background: none;  
+}
 </style>

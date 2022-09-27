@@ -72,7 +72,10 @@ export default {
     box-shadow: rgba(0, 0, 0, 0.25) 0px 54px 55px, rgba(0, 0, 0, 0.12) 0px -12px 30px, rgba(0, 0, 0, 0.12) 0px 4px 6px, rgba(0, 0, 0, 0.17) 0px 12px 13px, rgba(0, 0, 0, 0.09) 0px -3px 5px;
     // box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.1), 0 2px 4px -1px rgba(0, 0, 0, 0.06);
     background-color: #252A34;
-    padding: 64px 16px;
+    // padding: 15px 5px;
+    padding-left: 15px;
+    padding-right: 15px;
+    padding-top: 25px;
     border-radius: 10px;
 
     i {
