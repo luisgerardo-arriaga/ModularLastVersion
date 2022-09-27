@@ -2,17 +2,21 @@
    <section>
         <input type="radio" v-model="selectB" value = 0 name = "add" > Agregar entrada
         <br>
-        <input type="radio" v-model="selectB" value = 1 name = "add" > Nuevo producto
+        <input type="radio" v-model="selectB" value = 1 name = "add" checked> Nuevo producto
         <!-- <span>value: {{selectB}}</span> -->
     </section>
     <div id="pr">
         <!-- div input Add producto -->
-        <div v-if="show"> 
+        <div v-if="show">
             <form id="app" @submit.prevent="procesarFormulario">
+                <div id="alert-nuevo" class="alert-danger" v-show="lenCodigo">
+                    {{this.show_error}}
+                </div>
 
                 <div reg-c class="form-floating mb-3 mt-3 col-12">
                     <input required type="number" class="form-control" id="floatingNombreCaseta" placeholder="Codigoa"
-                    v-model.trim="inventario.codigo">
+                    v-model.trim="inventario.codigo"
+                    :class="{'is-invalid' : lenCodigo,}">
                     <label for="floatingNombreCaseta">Codigo</label>
                 </div>
                 <div class="form-floating mb-3 mt-3">
@@ -28,31 +32,32 @@
                 </button>
             </form>
         </div>
-        
+
         <div v-else>
-            <form @submit.prevent="updateInventarioIn(inventario)">
+            <form @submit.prevent="updateInventarioIn(inventario), clean">
                 <div id="pr">
-                    <!-- <p>{{option}}</p> -->
-                    <!-- <p>{{prueba}}</p> -->
-                    <select v-model="option">
-                        <option v-for="(item, index) in inventarios" :key="item" v-bind:value="index">
-                            {{item.nomProducto}}
-                        </option>
-                    </select>
-                    
+                    <div>
+                        <label for="">Elige un producto:</label>
+                        <select v-model="option" >
+                            <option v-for="(item, index) in inventarios" :key="item" v-bind:value="index">
+                                {{item.nomProducto}}
+                            </option>
+                        </select>
+                    </div>
+
 
                     <div class="form-floating mb-3 mt-3 col-12">
                         <input required type="number" class="form-control" id="floatingEtapaCaseta" placeholder="Entrada" v-model.trim="entrada">
                         <label for="floatingEtapaCaseta">Entrada</label>
                     </div>
-                
-                    <button v-on:click="asignar" @click="close" class="btn col-3" type="submit" 
+
+                    <button v-on:click="asignar" class="btn col-3" type="submit"
                     :disabled="bloquearBotonAddEntrada">
                         Añadir entrada
                     </button>
                 </div>
             </form>
-        </div>  
+        </div>
     </div>
 </template>
 
@@ -67,28 +72,39 @@ export default {
             option: null,
             productoN: null,
             ban: true,
-            inventario: {               
+            valiCodigo: false,
+            inventario: {
                 codigo: '',
                 nomProducto: '',
                 cantidad: '',
                 entrada: ''
-            }
+            },
+            show_error: "",
+            ban_error: true
         }
     },
     props: {
         // inventario: Object
     },
-    
+
     computed: {
+        showError(){
+
+        },
         asignar(){
             if(this.option!= null){
+                const aux = this.entrada
                 const x = this.option
                 this.inventario.id = this.inventarios[x].id
                 this.inventario.codigo = this.inventarios[x].codigo
                 this.inventario.nomProducto = this.inventarios[x].nomProducto
                 this.inventario.cantidad = this.inventarios[x].cantidad
-                this.inventario.entrada = parseInt(this.entrada) + parseInt(this.inventarios[x].entrada)
+                this.inventario.entrada = parseInt(aux) + parseInt(this.inventarios[x].entrada)
             }
+            
+        },
+        clean(){
+            return this.entrada = ""
         },
         prueba(){
             if(this.option != null){
@@ -100,15 +116,24 @@ export default {
         },
 
         bloquearBoton() {
-            if(this.inventario.codigo.trim() == "" || this.inventario.nomProducto.trim() == "" || this.inventario.cantidad.trim() == "" || this.inventario.cantidad <= 0) {
-                return true
+            this.ban_error = false
+            if(this.inventario.codigo.trim() == "" || this.inventario.nomProducto.trim() == "" || this.inventario.cantidad.trim() == "" || this.inventario.cantidad <= 0 || this.inventario.codigo.length > 6 ) {
+                this.valiCodigo = true
             }
             else{
-                return false
+                this.valiCodigo = false
             }
+            this.inventarios.forEach(element => {
+                if(element.codigo == this.inventario.codigo){
+                    this.valiCodigo = true
+                    this.ban_error = true
+                    this.show_error = "Este codigo ya esta registrado"
+                }
+            });
+            return this.valiCodigo
         },
         bloquearBotonAddEntrada() {
-            if(this.entrada.trim() == "" || this.entrada <= 0) {
+            if(this.entrada.trim() == "" || this.entrada <= 0 || this.option == null) {
                 return true
             }
             else{
@@ -122,9 +147,31 @@ export default {
             else{
                 return true
             }
-        }, 
+        },
+        lenCodigo(){
+            this.ban_error = false
+            if(this.inventario.codigo.length > 6){  
+                this.show_error = "Ingrese un codigo con una longitud maxima de 6 carateres"
+                this.ban_error = true
+                return true
+            }
+            this.inventarios.forEach(element => {
+                if(element.codigo == this.inventario.codigo){
+                    this.valiCodigo = true
+                    this.ban_error = true
+                    this.show_error = "Este codigo ya esta registrado"
+                    return true
+                }
+            });
+            return this.ban_error
+        },
+        completeCodigo(){
+            for(i = 1; i <= 6; i++){
+                    this.inventario.codigo = '0' + this.inventario.codigo
+                }
+        },
         ...mapState(['inventarios', 'inventario'])
-    }, 
+    },
     methods:{
         ...mapActions(['deleteInventario', 'updateInventarioIn', 'setInventario', 'cargarDBinventario']),
         procesarFormulario() {
@@ -137,8 +184,8 @@ export default {
                 codigo: '',
                 nomProducto: '',
                 cantidad: '',
-                entrada: ''            
-            }                
+                entrada: ''
+            }
         },
         created(){
             this.cargarDBinventario()
@@ -184,7 +231,9 @@ button{
     /* width: 200px; */
     transition: 0.7s;
     color: white;
-    
+    margin-top: 20px;
+    margin-bottom: 15px;
+
 }
 button:hover{
     background-color: #00b347;
@@ -209,5 +258,20 @@ input:-webkit-autofill:focus{
 option{
     background-color: #393E46;
     color: white;
+}
+select{
+    background-color: #393E46;
+    width: auto;
+    margin: auto;
+    color: white;
+    border-radius: 5px;
+    padding: 4px;
+}
+label{
+    margin-right: 15px;
+}
+
+#alert-nuevo{
+    border-radius: 5px;
 }
 </style>
