@@ -11,7 +11,8 @@
                           <p class="card-text fw-bold text-start"><strong>Etapa: </strong>{{ item.etapaCaseta }}</p>
                           <p class="card-text fw-bold text-start"><strong>Encargado: </strong>{{ item.encargadoCaseta }}</p>
                           <div class="divBotones">             
-                              <router-link class="btn btnEdit btn-success buttonEdit" :to="{name:'Producciondiaria', params:{id: item.id}}"><span class="textPro">PRODUCCIÓN DIARIA</span></router-link>
+                              <router-link class="btn btnEdit btn-success buttonEdit" :to="{name:'Producciondiaria', params:{id: item.id}}"><span class="textPro">PRODUCCIÓN DIARIA</span></router-link>                              
+                              <p>{{item.id}}</p>
                           </div>
                       </div>
                   </div>
