@@ -61,6 +61,12 @@ const routes = [
     meta: {rutaProtegida: true}
   },
   {
+    path: '/producciondiaria/:id',
+    name: 'Producciondiaria',
+    component: () => import(/* webpackChunkName: "about" */ '../views/Producciondiaria.vue'),
+    meta: {rutaProtegida: true}
+  },
+  {
     path: '/editarproduccion/:id',
     name: 'EditarProduccion',
     component: () => import(/* webpackChunkName: "about" */ '../views/EditarProduccion.vue'),

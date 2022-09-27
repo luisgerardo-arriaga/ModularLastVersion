@@ -72,7 +72,6 @@ export default {
     transition: .5s;
     z-index: 999;
     border: none; 
-
 }
 .btnDelete:hover{
     color: red;  
