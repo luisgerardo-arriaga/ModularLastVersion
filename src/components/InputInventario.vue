@@ -9,6 +9,9 @@
         <!-- div input Add producto -->
         <div v-if="show">
             <form id="app" @submit.prevent="procesarFormulario">
+                <div id="alert-nuevo" class="alert-danger" v-show="lenCodigo">
+                    {{this.show_error}}
+                </div>
 
                 <div reg-c class="form-floating mb-3 mt-3 col-12">
                     <input required type="number" class="form-control" id="floatingNombreCaseta" placeholder="Codigoa"
@@ -31,7 +34,7 @@
         </div>
 
         <div v-else>
-            <form @submit.prevent="updateInventarioIn(inventario)">
+            <form @submit.prevent="updateInventarioIn(inventario), clean">
                 <div id="pr">
                     <div>
                         <label for="">Elige un producto:</label>
@@ -48,7 +51,7 @@
                         <label for="floatingEtapaCaseta">Entrada</label>
                     </div>
 
-                    <button v-on:click="asignar" @click="close" class="btn col-3" type="submit"
+                    <button v-on:click="asignar" class="btn col-3" type="submit"
                     :disabled="bloquearBotonAddEntrada">
                         Añadir entrada
                     </button>
@@ -75,7 +78,9 @@ export default {
                 nomProducto: '',
                 cantidad: '',
                 entrada: ''
-            }
+            },
+            show_error: "",
+            ban_error: true
         }
     },
     props: {
@@ -83,15 +88,23 @@ export default {
     },
 
     computed: {
+        showError(){
+
+        },
         asignar(){
             if(this.option!= null){
+                const aux = this.entrada
                 const x = this.option
                 this.inventario.id = this.inventarios[x].id
                 this.inventario.codigo = this.inventarios[x].codigo
                 this.inventario.nomProducto = this.inventarios[x].nomProducto
                 this.inventario.cantidad = this.inventarios[x].cantidad
-                this.inventario.entrada = parseInt(this.entrada) + parseInt(this.inventarios[x].entrada)
+                this.inventario.entrada = parseInt(aux) + parseInt(this.inventarios[x].entrada)
             }
+            
+        },
+        clean(){
+            return this.entrada = ""
         },
         prueba(){
             if(this.option != null){
@@ -103,7 +116,7 @@ export default {
         },
 
         bloquearBoton() {
-            
+            this.ban_error = false
             if(this.inventario.codigo.trim() == "" || this.inventario.nomProducto.trim() == "" || this.inventario.cantidad.trim() == "" || this.inventario.cantidad <= 0 || this.inventario.codigo.length > 6 ) {
                 this.valiCodigo = true
             }
@@ -112,8 +125,9 @@ export default {
             }
             this.inventarios.forEach(element => {
                 if(element.codigo == this.inventario.codigo){
-                    console.log(element.codigo)
                     this.valiCodigo = true
+                    this.ban_error = true
+                    this.show_error = "Este codigo ya esta registrado"
                 }
             });
             return this.valiCodigo
@@ -135,10 +149,21 @@ export default {
             }
         },
         lenCodigo(){
-            if(this.inventario.codigo.length > 6){
+            this.ban_error = false
+            if(this.inventario.codigo.length > 6){  
+                this.show_error = "Ingrese un codigo con una longitud maxima de 6 carateres"
+                this.ban_error = true
                 return true
             }
-            return false
+            this.inventarios.forEach(element => {
+                if(element.codigo == this.inventario.codigo){
+                    this.valiCodigo = true
+                    this.ban_error = true
+                    this.show_error = "Este codigo ya esta registrado"
+                    return true
+                }
+            });
+            return this.ban_error
         },
         completeCodigo(){
             for(i = 1; i <= 6; i++){
@@ -206,6 +231,8 @@ button{
     /* width: 200px; */
     transition: 0.7s;
     color: white;
+    margin-top: 20px;
+    margin-bottom: 15px;
 
 }
 button:hover{
@@ -242,5 +269,9 @@ select{
 }
 label{
     margin-right: 15px;
+}
+
+#alert-nuevo{
+    border-radius: 5px;
 }
 </style>
