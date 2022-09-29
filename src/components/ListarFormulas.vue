@@ -7,7 +7,7 @@
                       <div  class="card-header card text-white bg-dark tarjetaTitulo">
                           <h5 class="fw-bold text-center">{{ item.nombreFormula }}</h5>
                       </div>                  
-                  </router-link>
+                    </router-link>
                       <div class="card-body tarjetaBody">   
                           <router-link class="router-casPo" :to="{name:'datosFormula', params:{id: item.id}}">
                         

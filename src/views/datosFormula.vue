@@ -1,13 +1,20 @@
 <template>
-  Hola aqui son lso datos de formula
+  <div class="container">
+    <h1>Hola</h1>
+    <InputFormulas/>
+  </div>
 </template>
 
-<script>
-export default {
 
+<script>
+import InputFormulas from "../components/InputFormulas.vue"
+
+export default {
+  components: {
+    InputFormulas,
+  },
 }
 </script>
 
 <style scoped>
-
 </style>

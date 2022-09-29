@@ -4,7 +4,8 @@ import router from '../router'
 export default createStore({
   state: {
     casetas: [],
-    formulas: [],    
+    formulas: [],
+    infoformulas:[],    
     caseta: {
       id: '',
       nombreCaseta: '',
@@ -13,8 +14,15 @@ export default createStore({
       encargadoCaseta: '',
     },
     formula:{
+      id: '',
       nombreFormula: '',
       etapaFormula:'',
+    },
+    infoFormula:{
+      id:'',
+      productos:'',
+      toneladas:'',
+      fecha:''
     },
     produccionDiaria: [],
     caseta_local: {
@@ -93,6 +101,12 @@ export default createStore({
       state.inventarios = state.inventarios.map(item => item.id == payload.id ? payload : item)
       router.push('/inventario')
     },
+    
+    updateInfoFormu(state, payload){
+      console.log(1)
+      state.infoformulas = state.infoformulas.map(item => item.id == payload.id ? payload : item)
+      router.push('/formulas')
+    },
 
     setError(state, payload) {
       if(payload == null) {
@@ -127,6 +141,10 @@ export default createStore({
     setForm(state, payload) {
       state.formulas.push(payload)      
       router.push('/formulas')
+    },
+    setInfoForm(state, payload) {
+      state.infoformulas.push(payload)      
+      router.push('/datosFormula')
     },
     eliminar(state, payload) {
       state.casetas = state.casetas.filter(item => item.id != payload)      
@@ -223,6 +241,8 @@ export default createStore({
         console.log(error)
       }
     },
+
+    
     async setInventario({commit, state}, inventario){
       try {
         const res = await fetch(`https://eggdb-5e1e1-default-rtdb.firebaseio.com/granja/inventario/${state.user.localId}/${inventario.id}.json?auth=${state.user.idToken}`, {
@@ -289,6 +309,26 @@ export default createStore({
         console.log(error)
       }
     },
+    // ################# Formulas info
+    // ########## Informacion Formula ######33333
+    async setInfoFormulas({ commit, state }, formula,) {
+      try {
+        const res = await fetch(`https://eggdb-5e1e1-default-rtdb.firebaseio.com/granja/formulas/${state.user.localId}/${formula.id}/ ${formula.infoFormula.id}.json?auth=${state.user.idToken}`, {
+          method: 'PUT',
+          headers: {
+            'Content-Type': 'application/json'
+          },
+          body: JSON.stringify(formula)
+        })
+        
+        const dataDB = await res.json()
+        commit('setForm', dataDB)
+
+      } catch (error) {
+        console.log(error)        
+      }
+    },
+    // #################### FIin formulas info
     async setProduccionCasetas({commit, state}, caseta_local){
       try {
         const res = await fetch(`https://eggdb-5e1e1-default-rtdb.firebaseio.com/granja/produccion/${state.user.localId}/${caseta_local.id}.json?auth=${state.user.idToken}`, {
