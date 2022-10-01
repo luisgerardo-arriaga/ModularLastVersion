@@ -1,17 +1,21 @@
 <template>
-    {{this.$route.params.id}}
+    <h2>Registro de nueva fomrula </h2>
+    <div id="alert-nuevo" class="alert-danger mb-3 mt-3 col-5 " v-show="validarSalida">
+        {{this.strSalida}}
+    </div>
     <form @submit.prevent="registrarDatos()">
         <div v-for="(item, index) in inventarios" :key="item.id" 
     class="form-floating mb-3 mt-3 col-5" id="formu">
+                
         <input required type="text" class="form-control" v-model="this.cantidadIn[index]" v-bind:key="item.id">
         <label for="floatingNombreCaseta">{{item.nomProducto}}</label>
-        <p>{{(this.nombreP[index] = item.nomProducto)}}</p>
+        <p v-show="false">{{(this.nombreP[index] = item.nomProducto)}}</p>
+        <p v-show="false">{{(this.arre_cantidad[index] = item.cantidad)}}</p>
     </div>
-    <button v-on:click="logg" class="btn col-3" type="submit">
+    <button v-on:click="logg(), registrarSalida()" :disabled="this.banSalida" class="btn col-3" type="submit">
         Añadir entrada                   
     </button>
     </form>
-    <p>{{this.nombreP[1]}}</p>  
 </template>
 
 <script>
@@ -21,11 +25,14 @@ import { mapActions, mapState } from 'vuex'
 export default {
     data() {
         return {
+            banSalida: false,
+            strSalida:'',
             cantidadIn:[],   
+            arre_cantidad:[],   
             produc:'',   
             tonelada:0, 
             fulldatetime:'',               
-            formula:{
+            formulax:{
                 id:'',
                 infoFormula:{
                     id:'',
@@ -34,16 +41,29 @@ export default {
                     fecha:''
                 },
             },
+            inventario: {
+                id:'',
+                salida: '',
+                saldo_act: '',
+            },
             nombreP:[]
         }        
     },
     computed: {
-            
-            pruebabt(){
-                console.log(prueba)
+        ...mapState(['inventarios', 'infoformulas',  'infoFormula','formula']),
+
+        validarSalida(){
+            this.banSalida = false
+                var i = 0
+                for(i = 0; i < this.cantidadIn.length; i++){
+                    if(parseInt(this.inventarios[i].saldo_act) < parseInt(this.cantidadIn[i])){
+                        this.strSalida = 'La cantiadad que desea resgistrar en ' + this.inventarios[i].nomProducto +' es mayor a la que se encuentra en el inventario.'
+                        this.banSalida = true
+                        return this.banSalida
+                    }
+                }
             },
-            ...mapState(['inventarios', 'infoformulas',  'infoFormula',])
-        },
+    },
         methods: {
             printDate: function(){
                 return new Date().toLocaleDateString();
@@ -57,29 +77,38 @@ export default {
             },
             logg(){
                 const x = this.cantidadIn
-                this.concatenarProductos()  
-                // this.registrarDatos()
-                // console.log(this.infoFormula)            
+                this.concatenarProductos()              
             },
             registrarDatos(){
                 this.sumaToneladas()
-                this.formula.id = this.$route.params.id
+                this.formulax.id = this.$route.params.id
 
-                this.formula.infoFormula.id = shortid.generate()
-                this.formula.infoFormula.productos = this.produc
-                this.formula.infoFormula.toneladas = this.tonelada
-                this.formula.infoFormula.fecha = this.fulldatetime
-                console.log(this.formula.infoFormula)
-                this.setInfoFormulas(this.formula)
+                this.formulax.infoFormula.id = shortid.generate()
+                this.formulax.infoFormula.productos = this.produc
+                this.formulax.infoFormula.toneladas = this.tonelada
+                this.formulax.infoFormula.fecha = this.fulldatetime
+                console.log(this.formulax.infoFormula)
+                this.setInfoFormulas(this.formulax)
                 
                 this.formula.id = ''
 
-                this.formula.infoFormula.id =  ''
-                this.formula.infoFormula.productos = ''
-                this.formula.infoFormula.toneladas = ''
-                this.formula.infoFormula.fecha = ''
+                this.formulax.infoFormula.id =  ''
+                this.formulax.infoFormula.productos = ''
+                this.formulax.infoFormula.toneladas = ''
+                this.formulax.infoFormula.fecha = ''
                 // this.setInfoForm(this.$route.params.id)
 
+            },
+            registrarSalida(){
+                var i = 0
+                for(i = 0; i < this.cantidadIn.length; i++){
+                    if(parseInt(this.inventarios[i].entrada) < parseInt(this.cantidadIn[i])){
+                        this.inventario.id = this.inventarios[i].id
+                        this.inventario.salida = parseInt(this.cantidadIn[i]) + parseInt(this.inventarios[i].salida)
+                        this.inventario.saldo_act = parseInt(this.inventarios[i].saldo_act) - parseInt(this.cantidadIn[i])
+                        this.updateInventarioOut(this.inventario)
+                    }
+                }
             },
             sumaToneladas(){
                 var i = 0
@@ -94,18 +123,17 @@ export default {
                     return false
                 }
             },
-            ...mapActions(['cargarDBinventario', 'setInfoFormulas','setInfoForm','setFormula','updateInfoFormu']),
+            ...mapActions(['cargarDBinventario', 'setInfoFormulas','setInfoForm','setFormula','updateInfoFormu', 'updateInventarioOut']),
             pruebax(){
                 // console.log(this.aux)
             }
         },
-        created(){
-            this.cargarDBinventario()
-
-        },
-        mounted: function () {
-            this.fulldatetime = this.printDate();
-        },
+    created(){
+        this.cargarDBinventario()
+    },
+    mounted: function () {
+        this.fulldatetime = this.printDate();
+    },
         
         
         
@@ -113,6 +141,13 @@ export default {
 </script>
 
 <style scoped>
+#alert-nuevo{
+    margin: auto;
+    border-radius: 5px;
+}
+h2{
+    margin-bottom: 55px;
+}
 #formu{
     margin: auto;
 }
@@ -123,6 +158,7 @@ input[type="text"], input[type="number"]{
     border-left: 0;
     color: white;
     transition: 0.7s;
+    margin-bottom: 28px;
 }
 input[type="text"]:focus, input[type="number"]:focus{
     border: 0;

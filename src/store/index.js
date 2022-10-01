@@ -46,6 +46,8 @@ export default createStore({
       nomProducto: '',
       cantidad: '',
       entrada: '',
+      salida:'',
+      saldo_act:''
     },
     user: null,
     error: {tipo: null, mensaje: null}
@@ -100,6 +102,11 @@ export default createStore({
       console.log(1)
       state.inventarios = state.inventarios.map(item => item.id == payload.id ? payload : item)
       router.push('/inventario')
+    },
+    updateInventarioSalida(state, payload){
+      console.log(1)
+      state.inventarios = state.inventarios.map(item => item.id == payload.id ? payload : item)
+      router.push('/formulas')
     },
     
     updateInfoFormu(state, payload){
@@ -223,6 +230,20 @@ export default createStore({
         const EGGDB = await res.json()  
         console.log(EGGDB) 
         commit('updateInventarioEntrada', EGGDB)
+      } catch (error) {
+        console.log(error)
+      }
+    },
+    async updateInventarioOut({commit, state}, inventario){
+      try {
+        const res = await fetch(`https://eggdb-5e1e1-default-rtdb.firebaseio.com/granja/inventario/${state.user.localId}/${inventario.id}.json?auth=${state.user.idToken}`,{
+          method: 'PATCH',
+          body: JSON.stringify(inventario)
+        })
+        
+        const EGGDB = await res.json()  
+        console.log(EGGDB) 
+        commit('updateInventarioSalida', EGGDB)
       } catch (error) {
         console.log(error)
       }

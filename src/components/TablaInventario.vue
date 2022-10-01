@@ -19,8 +19,8 @@
         <td>{{item.cantidad}}</td>
         <td>{{item.entrada}}</td>
         <td>{{parseInt(item.entrada) + parseInt(item.cantidad)}}</td>
-        <td>0</td>
-        <td>{{parseInt(item.entrada) + parseInt(item.cantidad) - 0}}</td>
+        <td>{{item.salida}}</td>
+        <td>{{item.saldo_act}}</td>
         <td>
           <button class="btn btn-danger me-2 btn-sm buttonDelete" @click="deleteInventario(item.id)" >
             <span class="material-icons btnDeletespan">delete</span>
