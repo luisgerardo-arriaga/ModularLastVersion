@@ -31,7 +31,11 @@ export default {
             bloquearBoton() {
                 if(this.caseta.nombreCaseta.trim() == "" || this.caseta.numeroGallinas.trim() == "" || this.caseta.etapaCaseta.trim() == "" || this.caseta.encargadoCaseta.trim() == "") {
                     return true
-                }else{
+                }
+                else if(this.caseta.numeroGallinas <= 0){
+                    return true
+                }
+                else{
                     return false
                 }
             }

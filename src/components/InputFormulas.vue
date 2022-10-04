@@ -5,14 +5,13 @@
     </div>
     <form @submit.prevent="registrarDatos()">
         <div v-for="(item, index) in inventarios" :key="item.id" 
-    class="form-floating mb-3 mt-3 col-5" id="formu">
-                
+        class="form-floating mb-3 mt-3 col-5" id="formu">
         <input required type="text" class="form-control" v-model="this.cantidadIn[index]" v-bind:key="item.id">
         <label for="floatingNombreCaseta">{{item.nomProducto}}</label>
         <p v-show="false">{{(this.nombreP[index] = item.nomProducto)}}</p>
         <p v-show="false">{{(this.arre_cantidad[index] = item.cantidad)}}</p>
     </div>
-    <button v-on:click="logg(), registrarSalida()" :disabled="this.banSalida" class="btn col-3" type="submit">
+    <button v-on:click="logg(), registrarSalida()" :disabled="this.banBt" class="btn col-3" type="submit">
         Añadir entrada                   
     </button>
     </form>
@@ -25,7 +24,9 @@ import { mapActions, mapState } from 'vuex'
 export default {
     data() {
         return {
+            acum: 0,
             banSalida: false,
+            banBt: false,
             strSalida:'',
             cantidadIn:[],   
             arre_cantidad:[],   
@@ -54,17 +55,38 @@ export default {
 
         validarSalida(){
             this.banSalida = false
+            this.banBt = false
                 var i = 0
                 for(i = 0; i < this.cantidadIn.length; i++){
                     if(parseInt(this.inventarios[i].saldo_act) < parseInt(this.cantidadIn[i])){
                         this.strSalida = 'La cantiadad que desea resgistrar en ' + this.inventarios[i].nomProducto +' es mayor a la que se encuentra en el inventario.'
                         this.banSalida = true
+                        this.banBt = true
+                        return this.banSalida
+                    }
+                    else if(this.cantidadIn[i] < 0 &&  this.cantidadIn[i] != '' ){
+                        this.strSalida = 'La cantiadad que desea resgistrar en ' + this.inventarios[i].nomProducto +' debe ser mayor o igual a 0'
+                        this.banSalida = true
+                        this.banBt = true
                         return this.banSalida
                     }
                 }
+                if(this.inventarios.length === 0){
+                        this.strSalida = 'No hay datos registrados en el inventario'
+                        this.banSalida = true
+                        this.banBt = true
+                        return this.banSalida
+
+                }
+              
+            },
+            lenArre(){
+                
             },
     },
         methods: {
+           
+
             printDate: function(){
                 return new Date().toLocaleDateString();
             },
@@ -116,13 +138,7 @@ export default {
                     this.tonelada = parseInt(this.tonelada) + parseInt(this.cantidadIn[i])
                 }
             },
-            bloquearBoton() {
-                if(this.caseta.nombreCaseta.trim() == "" || this.caseta.numeroGallinas.trim() == "" || this.caseta.etapaCaseta.trim() == "" || this.caseta.encargadoCaseta.trim() == "") {
-                    return true
-                }else{
-                    return false
-                }
-            },
+            
             ...mapActions(['cargarDBinventario', 'setInfoFormulas','setInfoForm','setFormula','updateInfoFormu', 'updateInventarioOut']),
             pruebax(){
                 // console.log(this.aux)
