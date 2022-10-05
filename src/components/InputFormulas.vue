@@ -3,6 +3,7 @@
     <div id="alert-nuevo" class="alert-danger mb-3 mt-3 col-5 " v-show="validarSalida">
         {{this.strSalida}}
     </div>
+    
     <form @submit.prevent="registrarDatos()">
         <div v-for="(item, index) in inventarios" :key="item.id" 
         class="form-floating mb-3 mt-3 col-5" id="formu">
@@ -57,6 +58,7 @@ export default {
             this.banSalida = false
             this.banBt = false
                 var i = 0
+                
                 for(i = 0; i < this.cantidadIn.length; i++){
                     if(parseInt(this.inventarios[i].saldo_act) < parseInt(this.cantidadIn[i])){
                         this.strSalida = 'La cantiadad que desea resgistrar en ' + this.inventarios[i].nomProducto +' es mayor a la que se encuentra en el inventario.'
@@ -70,6 +72,12 @@ export default {
                         this.banBt = true
                         return this.banSalida
                     }
+                    else if(this.cantidadIn[i] == '' || this.cantidadIn.length != this.nombreP.length){
+                        this.strSalida = 'Indique la cantidad a registrar a partir de 0, en todos los campos'
+                        this.banSalida = true
+                        this.banBt = true
+                        return this.banSalida
+                    }
                 }
                 if(this.inventarios.length === 0){
                         this.strSalida = 'No hay datos registrados en el inventario'
@@ -77,11 +85,7 @@ export default {
                         this.banBt = true
                         return this.banSalida
 
-                }
-              
-            },
-            lenArre(){
-                
+                }             
             },
     },
         methods: {
@@ -94,7 +98,9 @@ export default {
                 var i = 0
             
                 for(i = 0; i < this.nombreP.length; i++){
-                    this.produc += this.nombreP[i] + ": " + this.cantidadIn[i] + ", "
+                    if(parseInt(this.cantidadIn[i]) > 0){
+                        this.produc += this.nombreP[i] + ": " + this.cantidadIn[i] + ", "
+                    }
                 }
             },
             logg(){
@@ -123,8 +129,10 @@ export default {
             },
             registrarSalida(){
                 var i = 0
+                
                 for(i = 0; i < this.cantidadIn.length; i++){
-                    if(parseInt(this.inventarios[i].entrada) < parseInt(this.cantidadIn[i])){
+                    console.log(this.cantidadIn)
+                    if(parseInt(this.inventarios[i].entrada) > parseInt(this.cantidadIn[i])){
                         this.inventario.id = this.inventarios[i].id
                         this.inventario.salida = parseInt(this.cantidadIn[i]) + parseInt(this.inventarios[i].salida)
                         this.inventario.saldo_act = parseInt(this.inventarios[i].saldo_act) - parseInt(this.cantidadIn[i])

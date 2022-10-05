@@ -39,12 +39,7 @@ export default {
   
   data() {
     return {
-      inventario: {               
-        codigo: '',
-        nomProducto: '',
-        cantidad: '',
-        entrada: ''
-      }
+      
     }        
   },
   computed: {
@@ -52,20 +47,7 @@ export default {
   },
   methods: {
     ...mapActions(['setInventario', 'cargarDBinventario']),
-    
-    procesarFormulario() {
-      // this.inventario.entrada = '0'
-      this.inventario.id = shortid.generate()
-      this.setInventario(this.inventario)
-      console.log(this.inventario)
-      this.inventario = {
-        id: '',
-        codigo: '',
-        nomProducto: '',
-        cantidad: '',
-        entrada: ''            
-      }                
-    },
+   
   },
   
   created(){
