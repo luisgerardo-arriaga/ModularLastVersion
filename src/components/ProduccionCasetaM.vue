@@ -2,25 +2,23 @@
     <div class="InicioC listarCasetas container mt-3">        
         <div class="row ">
             <div class="col-sm-6 col-md-3 " v-for="item in casetas" :key="item.id">
+                <router-link class="btn btnEdit buttonEdit" :to="{name:'Producciondiaria', params:{id: item.id}}">
                   <div class="card mb-5 tarjetaCaseta" style="max-width: 20rem; min-width: 10rem;">
                       <div  class="card-header card text-white bg-dark tarjetaTitulo">
                           <h5 class="fw-bold text-center">{{ item.nombreCaseta }}</h5>
                       </div>
                       <div class="card-body tarjetaBody">   
-                          <p class="card-text fw-bold text-start"><strong>Gallinas: </strong>{{ item.numeroGallinas }}</p>
-                          <p class="card-text fw-bold text-start"><strong>Etapa: </strong>{{ item.etapaCaseta }}</p>
-                          <p class="card-text fw-bold text-start"><strong>Encargado: </strong>{{ item.encargadoCaseta }}</p>
-                          <div class="divBotones">             
-                              <router-link class="btn btnEdit btn-success buttonEdit" :to="{name:'Producciondiaria', params:{id: item.id}}"><span class="textPro">PRODUCCIÓN DIARIA</span></router-link>                              
-                              <p>{{item.id}}</p>
-                          </div>
-                      </div>
-                  </div>
+                            <p class="card-text fw-bold text-start"><strong>Gallinas: </strong>{{ item.numeroGallinas }}</p>
+                            <p class="card-text fw-bold text-start"><strong>Etapa: </strong>{{ item.etapaCaseta }}</p>
+                            <p class="card-text fw-bold text-start"><strong>Encargado: </strong>{{ item.encargadoCaseta }}</p>
+                        </div>
+                    </div>
+                </router-link>      
               </div>
         </div>
     </div>
     <!-- PRODUCCION -->
-<table class="table table-striped">
+<!-- <table class="table table-striped">
   <thead>
     <tr>
       <th scope="col">Nombre de caseta</th>
@@ -70,7 +68,7 @@
       </td>  
     </tr>
   </tbody>
-</table>  
+</table>   -->
 </template>
 
 <script>
@@ -129,8 +127,7 @@ p{
     transition: .5s;
     border: none;     
     width: 100%;
-    margin-top: 5px;   
-    font-family: cursive; 
+    margin-top: 5px;       
 }
 .buttonDelete:hover{
     color: red;  

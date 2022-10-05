@@ -1,20 +1,68 @@
 <template> 
 <div>
-    <br>
-    <label for="">Elige semana:</label>
-    <select v-model="option" @click="prueba">
-        <option>1</option>
-        <option>2</option>
-        <option>3</option>
-        <option>4</option>
-        <option>5</option>
+    <label for="" class="fs-4 m-3" >Elige semana:</label>
+    <select v-model="option" @click="prueba" class="selectSemana form-select-lg mb-3" aria-label="Default select example">
+        <option value="1">Semana 1</option>
+        <option value="2">Semana 2</option>
+        <option value="3">Semana 3</option>
+        <option value="4">Semana 4</option>
+        <option value="5">Semana 5</option>
+        <option value="6">Semana 6</option>
+        <option value="7">Semana 7</option>
+        <option value="8">Semana 8</option>
+        <option value="9">Semana 9</option>
+        <option value="10">Semana 10</option>
+        <option value="11">Semana 11</option>
+        <option value="12">Semana 12</option>
+        <option value="13">Semana 13</option>
+        <option value="14">Semana 14</option>
+        <option value="15">Semana 15</option>
+        <option value="16">Semana 16</option>
+        <option value="17">Semana 17</option>
+        <option value="18">Semana 18</option>
+        <option value="19">Semana 19</option>
+        <option value="20">Semana 20</option>
+        <option value="21">Semana 21</option>
+        <option value="22">Semana 22</option>
+        <option value="23">Semana 23</option>
+        <option value="24">Semana 24</option>
+        <option value="25">Semana 25</option>
+        <option value="26">Semana 26</option>
+        <option value="27">Semana 27</option>
+        <option value="28">Semana 28</option>
+        <option value="29">Semana 29</option>
+        <option value="30">Semana 30</option>
+        <option value="31">Semana 31</option>
+        <option value="32">Semana 32</option>
+        <option value="33">Semana 33</option>
+        <option value="34">Semana 34</option>
+        <option value="35">Semana 35</option>
+        <option value="36">Semana 36</option>
+        <option value="37">Semana 37</option>
+        <option value="38">Semana 38</option>
+        <option value="39">Semana 39</option>
+        <option value="40">Semana 40</option>
+        <option value="41">Semana 41</option>
+        <option value="42">Semana 42</option>
+        <option value="43">Semana 43</option>
+        <option value="44">Semana 44</option>
+        <option value="45">Semana 45</option>
+        <option value="46">Semana 46</option>
+        <option value="47">Semana 47</option>
+        <option value="48">Semana 48</option>
+        <option value="49">Semana 49</option>
+        <option value="50">Semana 50</option>
+        <option value="51">Semana 51</option>
+        <option value="52">Semana 52</option>
+        <option value="53">Semana 53</option>
+        <option value="54">Semana 54</option>
     </select>
 </div>
-    <div class="container text-center mt-5">
+    <div class="container text-center mt-2">
         <div class="row">
             <div class="tabla col">
-                <table class="table">
-                    <thead v-for="item in casetas" :key="item.id">
+                <table class="table table-striped">
+                    <thead v-for="item in casetas" :key="item.id" class="headerCaseta">
                         <th scope="col" v-if="this.$route.params.id == item.id">{{item.nombreCaseta}}</th>
                     </thead>
                     <thead>
@@ -31,7 +79,7 @@
                         </tr>
                     </thead>
                     <tbody>
-                        <tr>
+                        <tr >
                             <th scope="row">Huevo Cajas</th>
                             <td>{{ cajasHuevos[0] }}</td> <!-- Sabado --> 
                             <td>{{ cajasHuevos[1] }}</td> <!-- Domingo -->
@@ -40,7 +88,7 @@
                             <td>{{ cajasHuevos[4] }}</td> <!-- Miercoles -->
                             <td>{{ cajasHuevos[5] }}</td> <!-- Jueves -->
                             <td>{{ cajasHuevos[6] }}</td> <!-- Viernes -->
-                            <td>{{ totalSemana[0] }}</td>
+                            <td class="total">{{ totalSemana[0] }}</td>
                         </tr>                     
                         <tr>
                             <th scope="row">Huevo Grande</th>
@@ -51,7 +99,7 @@
                             <td>{{ grandeHuevos[4] }}</td> <!-- Miercoles -->
                             <td>{{ grandeHuevos[5] }}</td> <!-- Jueves -->
                             <td>{{ grandeHuevos[6] }}</td> <!-- Viernes -->
-                            <td>{{ totalSemana[1] }}</td>
+                            <td class="total">{{ totalSemana[1] }}</td>
                         </tr>   
                         <tr>
                             <th scope="row">Huevo Chico</th>
@@ -62,7 +110,7 @@
                             <td>{{ chicoHuevos[4] }}</td> <!-- Miercoles -->
                             <td>{{ chicoHuevos[5] }}</td> <!-- Jueves -->
                             <td>{{ chicoHuevos[6] }}</td> <!-- Viernes -->
-                            <td>{{ totalSemana[2] }}</td>
+                            <td class="total">{{ totalSemana[2] }}</td>
                         </tr>
                         <tr>
                             <th scope="row">Huevo Fragil</th>
@@ -73,7 +121,7 @@
                             <td>{{ fragilHuevos[4] }}</td> <!-- Miercoles -->
                             <td>{{ fragilHuevos[5] }}</td> <!-- Jueves -->
                             <td>{{ fragilHuevos[6] }}</td> <!-- Viernes -->
-                            <td>{{ totalSemana[3] }}</td>
+                            <td class="total">{{ totalSemana[3] }}</td>
                         </tr>
                         <tr>
                             <th scope="row">Huevo Sucio</th>
@@ -84,7 +132,7 @@
                             <td>{{ sucioHuevos[4] }}</td> <!-- Miercoles -->
                             <td>{{ sucioHuevos[5] }}</td> <!-- Jueves -->
                             <td>{{ sucioHuevos[6] }}</td> <!-- Viernes -->
-                            <td>{{ totalSemana[4] }}</td>
+                            <td class="total">{{ totalSemana[4] }}</td>
                         </tr>
                         <tr>
                             <th scope="row">Huevo Roto</th>
@@ -95,7 +143,7 @@
                             <td>{{ rotoHuevos[4] }}</td> <!-- Miercoles -->
                             <td>{{ rotoHuevos[5] }}</td> <!-- Jueves -->
                             <td>{{ rotoHuevos[6] }}</td> <!-- Viernes -->
-                            <td>{{ totalSemana[5] }}</td>
+                            <td class="total">{{ totalSemana[5] }}</td>
                         </tr>
                         <tr>
                             <th scope="row">Huevo Blando</th>
@@ -106,24 +154,25 @@
                             <td>{{ blandoHuevos[4] }}</td> <!-- Miercoles -->
                             <td>{{ blandoHuevos[5] }}</td> <!-- Jueves -->
                             <td>{{ blandoHuevos[6] }}</td> <!-- Viernes -->
-                            <td>{{ totalSemana[6] }}</td>
+                            <td class="total">{{ totalSemana[6] }}</td>
                         </tr>
-                        <tr>
-                            <th scope="row">Total del dia</th>
+                        <tr class="totalDia">
+                            <th scope="row" >Total del dia</th>
                             <td>{{ totalHuevos[0] }}</td> <!-- Sabado --> 
                             <td>{{ totalHuevos[1] }}</td> <!-- Domingo -->
                             <td>{{ totalHuevos[2] }}</td> <!-- Lunes -->
                             <td>{{ totalHuevos[3] }}</td> <!-- Martes -->
                             <td>{{ totalHuevos[4] }}</td> <!-- Miercoles -->
                             <td>{{ totalHuevos[5] }}</td> <!-- Jueves -->
-                            <td>{{ totalHuevos[6] }}</td> <!-- Viernes -->
-                            <!-- <td>{{ totalSemana[7] }}</td> -->
+                            <td >{{ totalHuevos[6] }}</td> <!-- Viernes -->
+                            <td class="total"></td>
                         </tr>
                     </tbody>
                 </table>                
             </div>
             <div class="grafica col">
                 2 of 2
+                <Grafica/>
             </div>
         </div>
     </div>
@@ -131,6 +180,7 @@
 
 <script>
 import {mapState, mapActions} from 'vuex'
+import Grafica from "../components/Grafica.vue"
 export default {
     data(){
         return{
@@ -146,12 +196,25 @@ export default {
             totalSemana: [0,0,0,0,0,0,0],
         }
     },
+    components: {
+        Grafica
+    },
     computed: {
         ...mapState(['produccionDiaria', 'casetas'])
     },
     methods: {
         ...mapActions(['deleteProduccionCaseta']),
         prueba(){
+            this.cajasHuevos = [0,0,0,0,0,0,0],
+            this.grandeHuevos = [0,0,0,0,0,0,0],
+            this.chicoHuevos = [0,0,0,0,0,0,0],
+            this.fragilHuevos = [0,0,0,0,0,0,0],
+            this.sucioHuevos = [0,0,0,0,0,0,0],
+            this.rotoHuevos = [0,0,0,0,0,0,0],
+            this.blandoHuevos = [0,0,0,0,0,0,0],
+            this.totalHuevos = [0,0,0,0,0,0,0],
+            this.totalSemana = [0,0,0,0,0,0,0],
+
             this.produccionDiaria.forEach(element => {
                 if(element.idCaseta == this.$route.params.id && element.semana == this.option){
                     if(element.diaRegistro == "Sabado"){
@@ -224,41 +287,66 @@ export default {
                         this.blandoHuevos[6] = element.huevoBlando
                         this.totalHuevos[6] = element.huevoTotal
                     }
+                    let aux = 0
+                    let aux1 = 0
+                    let aux2 = 0
+                    let aux3 = 0
+                    let aux4 = 0
+                    let aux5 = 0
+                    let aux6 = 0
+                    for (let i = 0; i < 6; i++) {         
+                        aux += parseInt(this.cajasHuevos[i])                                      
+                        aux1 += parseInt(this.grandeHuevos[i])                                      
+                        aux2 += parseInt(this.chicoHuevos[i])                                      
+                        aux3 += parseInt(this.fragilHuevos[i])                                      
+                        aux4 += parseInt(this.sucioHuevos[i])                                      
+                        aux5 += parseInt(this.rotoHuevos[i])                                      
+                        aux6 += parseInt(this.blandoHuevos[i])                                     
+                        this.totalSemana[0] = aux * 360
+                        this.totalSemana[1] = aux1
+                        this.totalSemana[2] = aux2
+                        this.totalSemana[3] = aux3
+                        this.totalSemana[4] = aux4
+                        this.totalSemana[5] = aux5
+                        this.totalSemana[6] = aux6
+                    }
                 }
-                this.totalSemana[0] += parseInt(this.cajasHuevos[0] * 360)
-            })            
-            
-            // for (let i = 0; i < 7; i++) {
-            //     this.totalSemana[0] += parseInt(this.cajasHuevos[i] * 360)
-            //     this.totalSemana[1] += parseInt(this.grandeHuevos[i])
-            //     this.totalSemana[2] += parseInt(this.chicoHuevos[i])
-            //     this.totalSemana[3] += parseInt(this.fragilHuevos[i])
-            //     this.totalSemana[4] += parseInt(this.sucioHuevos[i])
-            //     this.totalSemana[5] += parseInt(this.rotoHuevos[i])
-            //     this.totalSemana[6] += parseInt(this.blandoHuevos[i])                
-            // }            
+                
+            })   
         },
-        prueba2(){
-            this.totalSemana[0] == 0;
-        }
     },
 }
 </script>
 
 <style scoped>
+    .selectSemana{
+        margin-top: 2rem;
+    }
+    .headerCaseta{
+        background-color: black;
+        color: white;
+        font-size: larger;        
+    }
     .total{
-        color: red;
-        border-left:red 5px solid;
+        /* color: red; */
+        border-left:black 3px solid;
+    }
+    .totalDia{
+        border-top: black 3px solid;
     }
     .container{
         box-sizing: content-box;
+        
     }
-    .tabla{
-        background-color: lightblue;
+    .tabla{        
         margin-right: 1%;
+        
     }
     .grafica{
         background-color: lightcoral;
         margin-left: 1%;
+    }
+    table{
+        border:black 2px solid;        
     }
 </style>
