@@ -90,8 +90,6 @@ export default {
             },
     },
         methods: {
-           
-
             printDate: function(){
                 return new Date().toLocaleDateString();
             },

@@ -172,7 +172,7 @@
             </div>
             <div class="grafica col">
                 2 of 2
-                <Grafica/>
+                <Grafica :totalHuevos="totalHuevos"/>
             </div>
         </div>
     </div>
@@ -194,6 +194,7 @@ export default {
             blandoHuevos:[0,0,0,0,0,0,0],
             totalHuevos:[0,0,0,0,0,0,0],
             totalSemana: [0,0,0,0,0,0,0],
+            arre_grafia:[]
         }
     },
     components: {
@@ -204,6 +205,7 @@ export default {
     },
     methods: {
         ...mapActions(['deleteProduccionCaseta']),
+        
         prueba(){
             this.cajasHuevos = [0,0,0,0,0,0,0],
             this.grandeHuevos = [0,0,0,0,0,0,0],
@@ -344,7 +346,7 @@ export default {
         
     }
     .grafica{
-        background-color: lightcoral;
+        /* background-color: lightcoral; */
         margin-left: 1%;
     }
     table{
