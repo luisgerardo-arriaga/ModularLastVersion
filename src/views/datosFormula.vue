@@ -1,13 +1,25 @@
 <template>
-  Hola aqui son lso datos de formula
+  <div class="container">
+    <InputFormulas/>
+  </div>
 </template>
 
-<script>
-export default {
 
+<script>
+import InputFormulas from "../components/InputFormulas.vue"
+import { mapActions, mapState } from 'vuex'
+
+export default {
+  components: {
+    InputFormulas,
+  },
+  
 }
 </script>
 
 <style scoped>
-
+*{
+  margin-top: 26px;
+  margin-bottom: 55px;
+}
 </style>
