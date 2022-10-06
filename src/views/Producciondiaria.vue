@@ -330,6 +330,7 @@ export default {
     .total{
         /* color: red; */
         border-left:black 3px solid;
+        border-right: black 3px solid;
     }
     .totalDia{
         border-top: black 3px solid;
@@ -347,6 +348,8 @@ export default {
         margin-left: 1%;
     }
     table{
-        border:black 2px solid;        
+        border:black 2px solid;      
+        border-top: none;  
+        border-right: none;
     }
 </style>
