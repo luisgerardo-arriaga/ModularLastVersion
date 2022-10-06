@@ -1,4 +1,5 @@
 <template>
+    {{this.inventarios}}
     <h2>Registro de nueva fomrula </h2>
     <div id="alert-nuevo" class="alert-danger mb-3 mt-3 col-5 " v-show="validarSalida">
         {{this.strSalida}}
@@ -129,10 +130,8 @@ export default {
             },
             registrarSalida(){
                 var i = 0
-                
                 for(i = 0; i < this.cantidadIn.length; i++){
-                    console.log(this.cantidadIn)
-                    if(parseInt(this.inventarios[i].entrada) > parseInt(this.cantidadIn[i])){
+                    if(parseInt(this.inventarios[i].saldo_act) > parseInt(this.cantidadIn[i])){
                         this.inventario.id = this.inventarios[i].id
                         this.inventario.salida = parseInt(this.cantidadIn[i]) + parseInt(this.inventarios[i].salida)
                         this.inventario.saldo_act = parseInt(this.inventarios[i].saldo_act) - parseInt(this.cantidadIn[i])
