@@ -7,13 +7,13 @@
                       <div  class="card-header card text-white bg-dark tarjetaTitulo">
                           <h5 class="fw-bold text-center">{{ item.nombreFormula }}</h5>
                       </div>                  
-                  </router-link>
+                    </router-link>
                       <div class="card-body tarjetaBody">   
-                          <router-link class="router-casPo" :to="{name:'datosFormula', params:{id: item.id}}">
+                        <router-link class="router-casPo" :to="{name:'datosFormula', params:{id: item.id}}">
                         
                           <p class="card-text fw-bold text-start"><strong>Etapa: </strong>{{ item.etapaFormula }}</p>
                         
-                              </router-link>    
+                        </router-link>    
                           <div class="divBotones">                              
                               <router-link class="btn btnEdit btn-warning ml-2 btn-sm buttonEdit" :to="{name:'EditarFormulas', params:{id: item.id}}"><span class="material-icons">edit</span></router-link>
                               <button class="btn btnDelete btn-danger ml-2 btn-sm buttonDelete" @click="deleteFormulas(item.id)"><span class="material-icons btnDeletespan">delete</span></button>
@@ -39,6 +39,7 @@ export default {
 
 <style scoped>
 .router-casPo{
+    color: black;
     text-decoration: none;
 }
 .tarjetaCaseta{
@@ -46,20 +47,19 @@ export default {
     border-radius: 15px;
     transition: 1s;
 }
-    .tarjetaCaseta:hover{
-        cursor: pointer;
-        box-shadow: 0px 9px 18px 7px rgba(0,0,0,0.33);
+.tarjetaCaseta:hover{
+    cursor: pointer;
+    box-shadow: 0px 9px 18px 7px rgba(0,0,0,0.33);
     -webkit-box-shadow: 0px 9px 18px 7px rgba(0,0,0,0.33);
     -moz-box-shadow: 0px 9px 18px 7px rgba(0,0,0,0.33);
     }
 .tarjetaTitulo{
-        border-top-left-radius: 5px;
-        border-top-right-radius: 5px;
+    border-top-left-radius: 5px;
+    border-top-right-radius: 5px;
 }
 .buttonDelete{
     float: left;  
     border: none; 
-
     transition: .5s;
 }
 .divBotones{

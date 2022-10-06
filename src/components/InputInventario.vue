@@ -14,7 +14,7 @@
                 </div>
 
                 <div reg-c class="form-floating mb-3 mt-3 col-12">
-                    <input required type="number" class="form-control" id="floatingNombreCaseta" placeholder="Codigoa"
+                    <input required type="number" class="form-control" id="floatingNombreCaseta" placeholder="Codigo"
                     v-model.trim="inventario.codigo"
                     :class="{'is-invalid' : lenCodigo,}">
                     <label for="floatingNombreCaseta">Codigo</label>
@@ -77,7 +77,9 @@ export default {
                 codigo: '',
                 nomProducto: '',
                 cantidad: '',
-                entrada: ''
+                entrada: '',
+                salida:'',
+                saldo_act:''
             },
             show_error: "",
             ban_error: true
@@ -99,6 +101,8 @@ export default {
                 this.inventario.codigo = this.inventarios[x].codigo
                 this.inventario.nomProducto = this.inventarios[x].nomProducto
                 this.inventario.cantidad = this.inventarios[x].cantidad
+                this.inventario.salida = this.inventarios[x].salida
+                this.inventario.saldo_act = parseInt(aux) + parseInt(this.inventarios[x].saldo_act)
                 this.inventario.entrada = parseInt(aux) + parseInt(this.inventarios[x].entrada)
             }
             
@@ -176,6 +180,8 @@ export default {
         ...mapActions(['deleteInventario', 'updateInventarioIn', 'setInventario', 'cargarDBinventario']),
         procesarFormulario() {
             this.inventario.entrada = '0'
+            this.inventario.salida = '0'
+            this.inventario.saldo_act = this.inventario.cantidad
             this.inventario.id = shortid.generate()
             this.setInventario(this.inventario)
             console.log(this.inventario)

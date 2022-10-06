@@ -1,4 +1,5 @@
 <template>
+    
   <form @submit.prevent="updateProduccion(caseta_local)">
       <ProduccionCaseta :caseta_local="caseta_local"/>
   </form>

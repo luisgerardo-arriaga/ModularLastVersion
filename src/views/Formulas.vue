@@ -28,9 +28,15 @@ export default {
   },
   data() {
         return {
-            formula: {                
+            formula: {      
                 nombreFormula: '',
                 etapaFormula: '',
+                // infoFormula:{
+                //   id:'',
+                //   productos:'',
+                //   toneladas:'',
+                //   fecha:''
+                // },
             }
         }        
     },
@@ -38,10 +44,21 @@ export default {
     ...mapActions(['cargarDBFormulas', 'setFormulas']),
     procesarFormulario() {
                 this.formula.id = shortid.generate()
+                
+                // this.formula.infoFormula.fecha="fecha"
+                // this.formula.infoFormula.id= shortid.generate()
+                // this.formula.infoFormula.toneladas="toneladas"
+                
                 this.setFormulas(this.formula)
                 this.formula = {
                   nombreFormula: '',
-                  etapaFormula: '',            
+                  etapaFormula: '',
+                  // infoFormula:{
+                  //   id:'',
+                  //   productos:'',
+                  //   toneladas:'',
+                  //   fecha:''
+                  // },         
                 }                
             },
   },

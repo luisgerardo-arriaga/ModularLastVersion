@@ -19,8 +19,8 @@
         <td>{{item.cantidad}}</td>
         <td>{{item.entrada}}</td>
         <td>{{parseInt(item.entrada) + parseInt(item.cantidad)}}</td>
-        <td>0</td>
-        <td>{{parseInt(item.entrada) + parseInt(item.cantidad) - 0}}</td>
+        <td>{{item.salida}}</td>
+        <td :class="{'bg-dange' : this.valiSaldo(parseInt(item.saldo_act)),}">{{item.saldo_act}}</td>
         <td>
           <button class="btn btn-danger me-2 btn-sm buttonDelete" @click="deleteInventario(item.id)" >
             <span class="material-icons btnDeletespan">delete</span>
@@ -36,15 +36,27 @@ import { mapActions, mapState } from 'vuex'
 
 export default {
  computed: {
-    ...mapState(['inventarios'])
+    ...mapState(['inventarios']),
+    
   },
   methods:{
-    ...mapActions(['deleteInventario'])
+    
+    ...mapActions(['deleteInventario']),
+    valiSaldo(saldo){
+      if(saldo <= 7){
+        return true
+      }
+      return false
+    }
   }   
 }
 </script>
 
 <style scoped>
+.bg-dange{
+  background-color: rgba(255, 1, 1, 0.7);
+  border-radius: 5px;
+}
 .buttonDelete{
     float: left;  
     transition: .5s;
