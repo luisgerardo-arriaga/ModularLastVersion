@@ -173,7 +173,7 @@
             <div class="grafica col">
                 2 of 2
                 <!-- <Grafica :totalHuevos="totalHuevos" :option="option"/> -->
-                <canvas id="myChart"  width="400" height="400"></canvas>
+                <canvas id="myChart"  width="400" height="500"></canvas>
 
             </div>
         </div>
@@ -384,6 +384,9 @@ export default {
 </script>
 
 <style scoped>
+    #myChart{
+        margin-top: 53px;
+    }
     .selectSemana{
         margin-top: 2rem;
     }
