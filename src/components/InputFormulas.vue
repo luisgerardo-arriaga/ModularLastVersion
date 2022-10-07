@@ -129,7 +129,7 @@ export default {
             registrarSalida(){
                 var i = 0
                 for(i = 0; i < this.cantidadIn.length; i++){
-                    if(parseInt(this.inventarios[i].saldo_act) > parseInt(this.cantidadIn[i])){
+                    if(parseInt(this.inventarios[i].saldo_act) >= parseInt(this.cantidadIn[i])){
                         this.inventario.id = this.inventarios[i].id
                         this.inventario.salida = parseInt(this.cantidadIn[i]) + parseInt(this.inventarios[i].salida)
                         this.inventario.saldo_act = parseInt(this.inventarios[i].saldo_act) - parseInt(this.cantidadIn[i])
