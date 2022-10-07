@@ -1,5 +1,5 @@
 <template>
-    {{this.inventarios}}
+    {{this.formula}}
     <h2>Registro de nueva fomrula </h2>
     <div id="alert-nuevo" class="alert-danger mb-3 mt-3 col-5 " v-show="validarSalida">
         {{this.strSalida}}
@@ -115,7 +115,7 @@ export default {
                 this.formulax.infoFormula.toneladas = this.tonelada
                 this.formulax.infoFormula.fecha = this.fulldatetime
                 console.log(this.formulax.infoFormula)
-                this.setInfoFormulas(this.formulax)
+                this.setInfoFormulas( this.formulax)
                 
                 this.formula.id = ''
 

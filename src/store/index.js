@@ -5,7 +5,7 @@ export default createStore({
   state: {
     casetas: [],
     formulas: [],
-    infoformulas:[],    
+    infoformulas:[],
     caseta: {
       id: '',
       nombreCaseta: '',
@@ -15,15 +15,18 @@ export default createStore({
     },
     formula:{
       id: '',
+      infoFormula:{
+        id:'',
+        productos:'',
+        toneladas:'',
+        fecha:''
+      },
       nombreFormula: '',
-      etapaFormula:'',
+      etapaFormula:'',   
+    
     },
-    infoFormula:{
-      id:'',
-      productos:'',
-      toneladas:'',
-      fecha:''
-    },
+    
+
     produccionDiaria: [],
     caseta_local: {
       id: '',
@@ -332,9 +335,10 @@ export default createStore({
     },
     // ################# Formulas info
     // ########## Informacion Formula ######33333
-    async setInfoFormulas({ commit, state }, formula,) {
+    async setInfoFormulas({ commit, state }, formula) {
       try {
-        const res = await fetch(`https://eggdb-5e1e1-default-rtdb.firebaseio.com/granja/formulas/${state.user.localId}/${formula.id}/ ${formula.infoFormula.id}.json?auth=${state.user.idToken}`, {
+        const res = await fetch(`https://eggdb-5e1e1-default-rtdb.firebaseio.com/granja/formulas/${state.user.localId}/${formula.id}/infoformulas/${formula.infoFormula.id}.json?auth=${state.user.idToken}`, {
+        // const res = await fetch(`https://eggdb-5e1e1-default-rtdb.firebaseio.com/granja/formulas/${state.user.localId}/${formula.id}/ ${formula.infoFormula.id}.json?auth=${state.user.idToken}`, {
           method: 'PUT',
           headers: {
             'Content-Type': 'application/json'
