@@ -1,5 +1,4 @@
-<template>
-    {{this.formula}}
+<template> 
     <h2>Registro de nueva fomrula </h2>
     <div id="alert-nuevo" class="alert-danger mb-3 mt-3 col-5 " v-show="validarSalida">
         {{this.strSalida}}
@@ -44,6 +43,17 @@ export default {
                     fecha:''
                 },
             },
+
+            formula_local: {
+                id:'',
+                idFormula: '',
+                productos:'',
+                toneladas:'',
+                fecha:'',
+                nombreFormulaDat: '',
+                etapaFormulaDat:'',   
+            },
+
             inventario: {
                 id:'',
                 salida: '',
@@ -53,7 +63,7 @@ export default {
         }        
     },
     computed: {
-        ...mapState(['inventarios', 'infoformulas',  'infoFormula','formula']),
+        ...mapState(['inventarios', 'infoformulas',  'infoFormula','formula', 'formulas']),
 
         validarSalida(){
             this.banSalida = false
@@ -81,15 +91,17 @@ export default {
                     }
                 }
                 if(this.inventarios.length === 0){
-                        this.strSalida = 'No hay datos registrados en el inventario'
-                        this.banSalida = true
-                        this.banBt = true
-                        return this.banSalida
-
+                    this.strSalida = 'No hay datos registrados en el inventario'
+                    this.banSalida = true
+                    this.banBt = true
+                    return this.banSalida
+                    
                 }             
             },
-    },
+        },
         methods: {
+            ...mapActions(['cargarDBinventario', 'setInfoFormulas','setInfoForm','setFormula','updateInfoFormu', 'updateInventarioOut', 'setDatosFormula', 'setFormulas']),
+
             printDate: function(){
                 return new Date().toLocaleDateString();
             },
@@ -108,21 +120,49 @@ export default {
             },
             registrarDatos(){
                 this.sumaToneladas()
-                this.formulax.id = this.$route.params.id
+                //llena la data local para despues enviarla a firebase
+                this.formula_local.idFormula = this.$route.params.id
+                this.formula_local.id = shortid.generate()
+                this.formula_local.productos = this.produc
+                this.formula_local.toneladas = this.tonelada
+                this.formula_local.fecha = this.fulldatetime
 
-                this.formulax.infoFormula.id = shortid.generate()
-                this.formulax.infoFormula.productos = this.produc
-                this.formulax.infoFormula.toneladas = this.tonelada
-                this.formulax.infoFormula.fecha = this.fulldatetime
-                console.log(this.formulax.infoFormula)
-                this.setInfoFormulas( this.formulax)
+                for (let i = 0; i < this.formulas.length; i++) {
+                    if(this.$route.params.id == this.formulas[i].id){                        
+                        this.formula_local.nombreFormulaDat = this.formulas[i].nombreFormula
+                        this.formula_local.etapaFormulaDat = this.formulas[i].etapaFormula
+                    }
+                }
+
+                //envia datos al firebase
+                this.setDatosFormula( this.formula_local)
+
+
+                this.formula_local = {
+                    id:'',
+                    idFormula: '',
+                    productos:'',
+                    toneladas:'',
+                    fecha:'',
+                    nombreFormulaDat: '',
+                    etapaFormulaDat: '',
+                }
                 
-                this.formula.id = ''
+                // this.formulax.id = this.$route.params.id
 
-                this.formulax.infoFormula.id =  ''
-                this.formulax.infoFormula.productos = ''
-                this.formulax.infoFormula.toneladas = ''
-                this.formulax.infoFormula.fecha = ''
+                // this.formulax.infoFormula.id = shortid.generate()
+                // this.formulax.infoFormula.productos = this.produc
+                // this.formulax.infoFormula.toneladas = this.tonelada
+                // this.formulax.infoFormula.fecha = this.fulldatetime
+                
+                // this.setInfoFormulas( this.formulax)
+                
+                // this.formula.id = ''
+
+                // this.formulax.infoFormula.id =  ''
+                // this.formulax.infoFormula.productos = ''
+                // this.formulax.infoFormula.toneladas = ''
+                // this.formulax.infoFormula.fecha = ''
                 // this.setInfoForm(this.$route.params.id)
 
             },
@@ -144,7 +184,6 @@ export default {
                 }
             },
             
-            ...mapActions(['cargarDBinventario', 'setInfoFormulas','setInfoForm','setFormula','updateInfoFormu', 'updateInventarioOut']),
             pruebax(){
                 // console.log(this.aux)
             }

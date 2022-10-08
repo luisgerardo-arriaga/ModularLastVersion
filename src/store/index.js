@@ -4,8 +4,6 @@ import router from '../router'
 export default createStore({
   state: {
     casetas: [],
-    formulas: [],
-    infoformulas:[],
     caseta: {
       id: '',
       nombreCaseta: '',
@@ -13,6 +11,9 @@ export default createStore({
       etapaCaseta: '',
       encargadoCaseta: '',
     },
+
+    formulas: [],
+    infoformulas:[],
     formula:{
       id: '',
       infoFormula:{
@@ -25,7 +26,17 @@ export default createStore({
       etapaFormula:'',   
     
     },
-    
+
+    datosFormulas:[],
+    formula_local: {
+      id:'',
+      idFormula: '',
+      productos:'',
+      toneladas:'',
+      fecha:'',
+      nombreFormulaDat: '',
+      etapaFormulaDat:'',   
+    },
 
     produccionDiaria: [],
     caseta_local: {
@@ -43,6 +54,7 @@ export default createStore({
       diaRegistro: 0,     
       nombreCaseta: '',   
     },
+
     inventarios: [],
     inventario: {               
       codigo: '',
@@ -52,6 +64,7 @@ export default createStore({
       salida:'',
       saldo_act:''
     },
+
     user: null,
     error: {tipo: null, mensaje: null}
   },
@@ -66,6 +79,9 @@ export default createStore({
     cargarInventario(state, payload) {
       state.inventarios = payload
     },
+    cargarDatosFormulas(state, payload) {
+      state.datosFormulas = payload
+    },
     updateInventario(state, payload){
       state.inventarios = state.inventarios.map(item => item.id == payload.id ? payload : item)
       router.push('/inventario')
@@ -78,6 +94,11 @@ export default createStore({
       state.inventario = state.inventarios.find(item => item.id == payload)
     },
     //datos inventario fin
+
+    //datosformula
+    setDatosF(state, payload){
+      state.datosFormulas.push(payload)
+    },
 
     //Aqui comienza todo lo relacionado con la produccion de huevo diario
     setProduccion(state, payload){
@@ -162,6 +183,9 @@ export default createStore({
     eliminarFormula(state, payload) {
       state.formulas = state.formulas.filter(item => item.id != payload)      
     },
+    eliminarFormulaDatos(state, payload) {
+      state.datosFormulas = state.datosFormulas.filter(item => item.id != payload)      
+    },
     caseta(state, payload) {
       if(!state.casetas.find(item => item.id == payload)){
         router.push('/inicio')        
@@ -210,6 +234,28 @@ export default createStore({
         console.log(error)        
       }
     },
+
+    async cargarDBDatosFormulas({ commit, state }){
+      if(localStorage.getItem('usuario')) {
+        commit('setUser', JSON.parse(localStorage.getItem('usuario')))
+      }else{
+        return commit('setUser', null)
+      }
+      try {
+        const res = await fetch (`https://eggdb-5e1e1-default-rtdb.firebaseio.com/granja/datosFormulas/${state.user.localId}.json?auth=${state.user.idToken}`)    
+        const dataEGGDB = await res.json()
+        const array = []
+        
+        for(let id in dataEGGDB){
+          array.push(dataEGGDB[id])          
+        }  
+        commit('cargarDatosFormulas', array)
+        
+      } catch (error) {
+        console.log(error)        
+      }
+    },
+
     async updateInventario({commit, state}, inventario){
       try {
         const res = await fetch(`https://eggdb-5e1e1-default-rtdb.firebaseio.com/granja/inventario/${state.user.localId}/${inventario.id}.json?auth=${state.user.idToken}`,{
@@ -354,6 +400,24 @@ export default createStore({
       }
     },
     // #################### FIin formulas info
+    //PRUEBA PARA INGRESAR DATOS A LAS FORMULAS
+    async setDatosFormula({commit, state}, formula_local){
+      try {
+        const res = await fetch(`https://eggdb-5e1e1-default-rtdb.firebaseio.com/granja/datosFormulas/${state.user.localId}/${formula_local.id}.json?auth=${state.user.idToken}`, {
+          method: 'PUT',
+          header: {
+            'Content-Type': 'aplication/json'
+          },
+          body: JSON.stringify(formula_local)
+        })
+        
+        const dataEGGDB = await res.json() 
+        
+      } catch (error) {
+        console.log(error)
+      }
+      commit('setDatosF', formula_local)
+    },
     async setProduccionCasetas({commit, state}, caseta_local){
       try {
         const res = await fetch(`https://eggdb-5e1e1-default-rtdb.firebaseio.com/granja/produccion/${state.user.localId}/${caseta_local.id}.json?auth=${state.user.idToken}`, {
@@ -515,6 +579,16 @@ export default createStore({
           method: 'DELETE'
         })
         commit('eliminarFormula', id)
+      } catch (error) {
+        console.log(error)
+      }
+    },
+    async deleteFormulasDatos({ commit, state }, id){
+      try {
+        await fetch(`https://eggdb-5e1e1-default-rtdb.firebaseio.com/granja/datosFormulas/${state.user.localId}/${id}.json?auth=${state.user.idToken}`, {
+          method: 'DELETE'
+        })
+        commit('eliminarFormulaDatos', id)
       } catch (error) {
         console.log(error)
       }
