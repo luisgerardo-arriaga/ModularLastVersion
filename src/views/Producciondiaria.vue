@@ -172,7 +172,9 @@
             </div>
             <div class="grafica col">
                 2 of 2
-                <Grafica/>
+                <!-- <Grafica :totalHuevos="totalHuevos" :option="option"/> -->
+                <canvas id="myChart"  width="400" height="500"></canvas>
+
             </div>
         </div>
     </div>
@@ -184,6 +186,9 @@ import Grafica from "../components/Grafica.vue"
 export default {
     data(){
         return{
+            aux:'',
+            banGra:true,
+            ban:true,
             option: null,
             cajasHuevos:[0,0,0,0,0,0,0],
             grandeHuevos:[0,0,0,0,0,0,0],
@@ -194,6 +199,7 @@ export default {
             blandoHuevos:[0,0,0,0,0,0,0],
             totalHuevos:[0,0,0,0,0,0,0],
             totalSemana: [0,0,0,0,0,0,0],
+            arre_grafia:[]
         }
     },
     components: {
@@ -204,6 +210,7 @@ export default {
     },
     methods: {
         ...mapActions(['deleteProduccionCaseta']),
+        
         prueba(){
             this.cajasHuevos = [0,0,0,0,0,0,0],
             this.grandeHuevos = [0,0,0,0,0,0,0],
@@ -313,12 +320,73 @@ export default {
                 }
                 
             })   
+            this.show_gra()
         },
+        show_gra(){
+          if(this.aux != this.option){
+            console.log(1)
+            this.ban = true
+          }
+        
+          if(this.ban){
+            this.ban = false
+            this.aux = this.option
+            console.log(this.aux)
+
+            if(this.banGra){
+              this.banGra = false
+              this.grafica()
+            }
+
+            else{
+              console.log(3)
+              this.myChart.destroy()
+              this.grafica()
+            }
+          }
+        },
+        grafica(){
+          const ctx = document.getElementById('myChart');
+          
+          // myChart.refresh
+          this.myChart = new Chart(ctx, {
+            type: 'bar',
+            data: {
+              labels: ['Sabado', 'Domingo', 'Lunes', 'Martes', 'Miercoles', 'Jueves', 'Viernes'], 
+              datasets: [{
+                label: '# of Votes',
+                data: this.totalHuevos,
+                backgroundColor: [
+                  'rgba(0, 173, 181,  0.2)',
+                  'rgba(0, 0, 0, 0.2)',
+                  'rgba(196, 251, 107, 0.2)'
+                ],
+                borderColor: [
+                  'rgba(0, 173, 181, 1)',
+                  'rgba(0, 0, 0, 1)',
+                  'rgba(196, 251, 107, 1)'
+                ],
+                borderWidth: 1,
+              }]
+            },
+            options: {
+              scales: {
+                y: {
+                  beginAtZero: true
+                }
+              }
+            }
+          });
+          this.myChart;
+        }
     },
 }
 </script>
 
 <style scoped>
+    #myChart{
+        margin-top: 53px;
+    }
     .selectSemana{
         margin-top: 2rem;
     }
@@ -344,7 +412,7 @@ export default {
         
     }
     .grafica{
-        background-color: lightcoral;
+        /* background-color: lightcoral; */
         margin-left: 1%;
     }
     table{

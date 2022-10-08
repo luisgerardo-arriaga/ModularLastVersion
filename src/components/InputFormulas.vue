@@ -1,5 +1,5 @@
 <template>
-    {{this.inventarios}}
+    {{this.formula}}
     <h2>Registro de nueva fomrula </h2>
     <div id="alert-nuevo" class="alert-danger mb-3 mt-3 col-5 " v-show="validarSalida">
         {{this.strSalida}}
@@ -90,8 +90,6 @@ export default {
             },
     },
         methods: {
-           
-
             printDate: function(){
                 return new Date().toLocaleDateString();
             },
@@ -117,7 +115,7 @@ export default {
                 this.formulax.infoFormula.toneladas = this.tonelada
                 this.formulax.infoFormula.fecha = this.fulldatetime
                 console.log(this.formulax.infoFormula)
-                this.setInfoFormulas(this.formulax)
+                this.setInfoFormulas( this.formulax)
                 
                 this.formula.id = ''
 
@@ -131,7 +129,7 @@ export default {
             registrarSalida(){
                 var i = 0
                 for(i = 0; i < this.cantidadIn.length; i++){
-                    if(parseInt(this.inventarios[i].saldo_act) > parseInt(this.cantidadIn[i])){
+                    if(parseInt(this.inventarios[i].saldo_act) >= parseInt(this.cantidadIn[i])){
                         this.inventario.id = this.inventarios[i].id
                         this.inventario.salida = parseInt(this.cantidadIn[i]) + parseInt(this.inventarios[i].salida)
                         this.inventario.saldo_act = parseInt(this.inventarios[i].saldo_act) - parseInt(this.cantidadIn[i])

@@ -1,57 +1,104 @@
 <template>
+  {{option}}
     <div id="iniG">
-      <canvas id="myChart"></canvas>
+      <canvas id="myChart"  width="400" height="400"></canvas>
+      <!-- <canvas id="myChart" ></canvas> -->
+      <button v-on:click="this.show_gra"> press</button>
     </div>
   </template>
   
   <script>
   
-  import Chart from 'chart.js/auto';
+  import { thisTypeAnnotation, tSMethodSignature } from '@babel/types';
+import Chart from 'chart.js/auto';
   
     export default {
-    mounted(){
-      const ctx = document.getElementById('myChart');
-      const myChart = new Chart(ctx, {
+      data(){
+        return{
+            totalSeman: [0,15,10,4,3,3,1],
+            banGra: true,
+            myChart:[],
+            aux:"",
+            ban: true,
+          }
+      },
+      props: {
+        totalHuevos: Object,
+        option:String
+      },
+      // mounted(){
+      //   this.grafica()
+      // },
       
-      type: 'bar',
-      data: {
-          labels: ['Domingo', 'Lunes', 'Martes', 'Miercoles', 'Jueves', 'Viernes', 'Sabado'],
-          datasets: [{
-              label: '# of Votes',
-              data: [12, 19, 3, 5, 2, 10, 1],
-              backgroundColor: [
+      methods: {
+        
+        show_gra(){
+          if(this.aux != this.option){
+            this.ban = true
+          }
+        
+          if(this.ban){
+            this.ban = false
+            this.aux = this.option
+            console.log(this.aux)
+
+            if(this.banGra){
+              this.banGra = false
+              this.grafica()
+            }
+
+            else{
+              console.log(3)
+              this.myChart.destroy()
+              this.grafica()
+            }
+          }
+        },
+        grafica(){
+          const ctx = document.getElementById('myChart');
+          
+          // myChart.refresh
+          this.myChart = new Chart(ctx, {
+            type: 'bar',
+            data: {
+              labels: ['Sabado', 'Domingo', 'Lunes', 'Martes', 'Miercoles', 'Jueves', 'Viernes'], 
+              datasets: [{
+                label: '# of Votes',
+                data: this.totalHuevos,
+                backgroundColor: [
                   'rgba(0, 173, 181,  0.2)',
                   'rgba(0, 0, 0, 0.2)',
                   'rgba(196, 251, 107, 0.2)'
-              ],
-              borderColor: [
+                ],
+                borderColor: [
                   'rgba(0, 173, 181, 1)',
                   'rgba(0, 0, 0, 1)',
                   'rgba(196, 251, 107, 1)'
-              ],
-              borderWidth: 1
-          }]
-      },
-      options: {
-          scales: {
-              y: {
+                ],
+                borderWidth: 1,
+              }]
+            },
+            options: {
+              scales: {
+                y: {
                   beginAtZero: true
+                }
               }
-          }
-      }
-  });
-  myChart;
-    }
+            }
+          });
+          this.myChart;
+        }
+      },
   }
   </script>
   
   <style scoped>
   canvas{
-    width: 100px;
-    height: 100px;
+    width: 500px;
+    height: 500px;
   }
   #iniG{
     width: 400px;
-    height: 200px;
+    height: 500px;
   }
   </style>
