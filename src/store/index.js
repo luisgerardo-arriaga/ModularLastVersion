@@ -3,6 +3,11 @@ import router from '../router'
 
 export default createStore({
   state: {
+    //PRUEBA BUSCAR
+    paises: [],
+    paisesFiltrados: [],
+    // 
+
     casetas: [],
     caseta: {
       id: '',
@@ -69,6 +74,15 @@ export default createStore({
     error: {tipo: null, mensaje: null}
   },
   mutations: {
+    // PRUEBAS BUSCAR
+    setPaises(state, payload) {
+      state.paises = payload
+    },
+    setPaisesFiltrados(state, payload) {
+      state.paisesFiltrados = payload
+    },
+    // 
+
     //datos inventario inicio
     setInventario(state, payload){
       state.inventarios.push(payload)
@@ -212,6 +226,34 @@ export default createStore({
   },
   
   actions: {
+    // PRUEBA BUSQUEDA
+    async getPaises({ commit }) {
+      try {
+        const res = await fetch('api.json')
+        const data = await res.json()
+        // console.log(data)
+        commit('setPaises', data)
+      } catch (error) {
+        console.log(error)
+      }
+    },
+    filtrarRegion({ commit, state }, region) {
+      const filtro = state.paises.filter(pais => 
+        pais.region.includes(region)
+      )
+      commit('setPaisesFiltrados', filtro)
+    },
+    filtroNombre({ commit, state }, texto) {
+      const textoCliente = texto.toLowerCase()
+      const filtro = state.paises.filter(pais => {
+        const textoApi = pais.name.toLowerCase()
+        if (textoApi.includes(textoCliente)) {
+          return pais
+        }
+      })
+      commit('setPaisesFiltrados', filtro)
+    },
+    // // // // // // // // // 
 
     //Actions inventarios inicio
     async cargarDBinventario({ commit, state }){
@@ -249,6 +291,7 @@ export default createStore({
         for(let id in dataEGGDB){
           array.push(dataEGGDB[id])          
         }  
+        console.log(array)
         commit('cargarDatosFormulas', array)
         
       } catch (error) {
@@ -629,6 +672,11 @@ export default createStore({
   getters: {
     usuarioAutenticado(state){
       return !!state.user
+    },
+    topPaisesPoblacion(state) {
+      return state.paisesFiltrados.sort((a, b) =>
+        a.population < b.population ? 1 : -1
+      )
     }
   },
 

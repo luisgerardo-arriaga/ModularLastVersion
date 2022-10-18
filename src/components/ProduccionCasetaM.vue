@@ -26,8 +26,12 @@ export default {
         ...mapState(['produccionDiaria', 'casetas'])
     },
     methods: {
-        ...mapActions(['deleteProduccionCaseta'])
+        ...mapActions(['deleteProduccionCaseta', 'cargarDB'])
+    },
+    created(){
+        this.cargarDB()
     }
+    
 }
 
 </script>

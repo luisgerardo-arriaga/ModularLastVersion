@@ -16,10 +16,9 @@ export default {
   methods: {
     ...mapActions(['cargarDB', 'cargarDBProduccion'])
   },
-  created() {
-    this.cargarDB(),
+  created() {    
     this.cargarDBProduccion()
-  }
+  }  
 }
 </script>
 

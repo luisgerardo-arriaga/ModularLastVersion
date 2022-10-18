@@ -1,18 +1,21 @@
 <template>  
+<h1>busqueda</h1>
+<div class="field has-addons is-pulled-right">
+  <div class="control">
+    <input v-model="search" type="text" class="input is-rounded" v-on:keyup.enter="searchData">
+  </div>
+  <button class="button is-success is-rounded" v-on:click="searchData">Buscar</button>
+</div>
       <div class="container text-center mt-2">
         <div class="row">
             <div class="tabla col">
                 <table class="table table-striped">
-                    <!-- <thead v-for="item in casetas" :key="item.id" class="headerCaseta">
-                        <th scope="col" v-if="this.$route.params.id == item.id">{{item.nombreCaseta}}</th>
-                    </thead> -->
                     <thead>
                         <tr>
                             <th scope="col">TONELADAS</th>
                             <th scope="col">ETAPA</th>
                             <th scope="col">PRODUCTOS</th>
                             <th scope="col">FECHA</th>
-                            <!-- <th scope="col" v-for="item in inventarios" :key="item.id">{{item.nomProducto}}</th> -->
                         </tr>
                     </thead>
                     <tbody >
@@ -30,8 +33,15 @@
 </template>
 
 <script>
+
 import { mapState, mapActions } from 'vuex'
 export default {
+  data() {
+    return {
+      search: '',
+      array:[]
+    }
+  },
   computed: {
     ...mapState(['inventarios', 'datosFormulas']),    
   },

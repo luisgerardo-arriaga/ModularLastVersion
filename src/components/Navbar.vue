@@ -1,6 +1,6 @@
 <template>
 <nav v-if="usuarioAutenticado" class="navbar-dark bg-dark p-3 nava" type="dark">
-  <ul class="nav justify-content-center" >
+  <ul class="nav justify-content-center">
             <li class="nav-item mt-2">
                 <router-link to="/inicio" class="nav-link navbar-brand">
                     <span class="material-icons">egg</span>
