@@ -207,7 +207,7 @@ export default {
         ...mapState(['produccionDiaria', 'casetas'])
     },
     methods: {
-        ...mapActions(['deleteProduccionCaseta']),
+        ...mapActions(['deleteProduccionCaseta', 'cargarDB']),
         
         prueba(){
             this.cajasHuevos = [0,0,0,0,0,0,0],
@@ -379,6 +379,9 @@ export default {
           });
           this.myChart;
         }
+    },    
+    created() {    
+        this.cargarDB()
     },
 }
 </script>

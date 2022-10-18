@@ -63,6 +63,7 @@ export default {
         ...mapState(['casetas'])
     },
     methods: {
+
         ...mapActions(['deleteCasetas'])
     },
     setup() {
