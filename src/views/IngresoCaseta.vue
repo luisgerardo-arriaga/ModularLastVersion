@@ -26,7 +26,7 @@ export default {
         }        
     },
     methods: {
-        ...mapActions(['setCasetas']),
+        ...mapActions(['setCasetas', 'cargarDB']),
             procesarFormulario() {
                 this.caseta.id = shortid.generate()
                 this.setCasetas(this.caseta)
@@ -38,6 +38,9 @@ export default {
                     encargadoCaseta: ''                    
                 }                
             },
+        },
+        created() {    
+            this.cargarDB()
         },
         computed: {
             bloquearBoton() {

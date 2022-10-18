@@ -1,5 +1,5 @@
-<template>
-    <div class="InicioC listarCasetas container ">        
+<template>    
+    <div class="InicioC listarCasetas container">        
         <div class="row ">
             <div class="col-sm-6 col-md-3 " v-for="item in formulas" :key="item.id" :to="{name:'datosFormula', params:{id: item.id}}">
                   <div class="card mb-5 tarjetaCaseta" style="max-width: 20rem; min-width: 10rem;" :to="{name:'datosFormula', params:{id: item.id}}">
@@ -29,10 +29,10 @@
 import {mapActions, mapState} from 'vuex'
 export default {
     computed: {
-        ...mapState(['formulas'])
+        ...mapState(['formulas', 'datosFormulas'])
     },
     methods: {
-        ...mapActions(['deleteFormulas'])
+        ...mapActions(['deleteFormulas', 'deleteFormulasDatos']),
     }
 }
 </script>

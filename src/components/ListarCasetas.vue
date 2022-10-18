@@ -32,7 +32,10 @@ export default {
         ...mapState(['casetas'])
     },
     methods: {
-        ...mapActions(['deleteCasetas'])
+        ...mapActions(['deleteCasetas', 'cargarDB'])
+    },
+    created() {
+        this.cargarDB()
     }
 }
 </script>

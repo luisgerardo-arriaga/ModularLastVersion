@@ -1,12 +1,19 @@
 <template>
   <div class="alimento">
-    <h1>Alimento</h1>
+    <tablaAlimento></tablaAlimento>
   </div>  
 </template>
 
 <script>
+  import { mapState } from 'vuex'
+  import tablaAlimento from "../components/TablaAlimento.vue"
 export default {
-
+  components:{
+    tablaAlimento
+  },
+  computed: {
+    ...mapState(['inventarios']),    
+  },
 }
 </script>
 

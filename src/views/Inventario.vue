@@ -2,10 +2,7 @@
   <div class="inicio container">      
       <Modal @close="toggleModal" :modalActive="modalActive">      
         <div class="ingresocaseta container">
-          <!-- <h1 style="color: red">Registro de casetas</h1> -->
-          <!-- <form id="app" @submit.prevent="procesarFormulario"> -->
             <Input />
-          <!-- </form> -->
         </div>      
     </Modal>
     <div class="boton">

@@ -1,0 +1,40 @@
+{
+    "I2aoF9fjnPhb3EDxlnUsPd7f2Li1": {
+      "6dvCkLuZl": {
+        "etapaFormulaDat": "desarrollo",
+        "fecha": "11/10/2022",
+        "id": "6dvCkLuZl",
+        "idFormula": "aBCI3QnCU",
+        "nombreFormulaDat": "La primera",
+        "productos": "azicar: 12, SAL: 32, Sorgo: 2, ",
+        "toneladas": 46
+      },
+      "LEaHes3sV": {
+        "etapaFormulaDat": "44",
+        "fecha": "8/10/2022",
+        "id": "LEaHes3sV",
+        "idFormula": "S8-Sba1pt",
+        "nombreFormulaDat": "rrrr",
+        "productos": "azicar: 1, SAL: 1, Sorgo: 1, ",
+        "toneladas": 3
+      },
+      "Ubgl5_4kp": {
+        "etapaFormulaDat": "1",
+        "fecha": "8/10/2022",
+        "id": "Ubgl5_4kp",
+        "idFormula": "XNqlIphkU",
+        "nombreFormulaDat": "qwer",
+        "productos": "azicar: 12312, SAL: 1123, Sorgo: 3213, ",
+        "toneladas": 16648
+      },
+      "WSEx-JaMa": {
+        "etapaFormulaDat": "44",
+        "fecha": "8/10/2022",
+        "id": "WSEx-JaMa",
+        "idFormula": "S8-Sba1pt",
+        "nombreFormulaDat": "rrrr",
+        "productos": "azicar: 123, SAL: 321, Sorgo: 1, ",
+        "toneladas": 445
+      }
+    }
+  }
