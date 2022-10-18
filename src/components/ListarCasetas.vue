@@ -28,7 +28,7 @@
                                     </span>
 
                                         <div id="con-btdt">
-                                            <button id="" class="delete-m btn btnSi btn-danger ml-2 btn-sm buttonDelete" @click="deleteCasetas(item.id)">
+                                            <button id="" class="delete-m btn btnSi btn-danger ml-2 btn-sm buttonDelete" @click="deleteCasetas(item.id), toggleModal2()">
                                                 <span id ="" class="icon-palo material-symbols-outlined">task_alt</span>
                                             </button>
 
@@ -67,14 +67,15 @@ export default {
         ...mapActions(['deleteCasetas'])
     },
     setup() {
-    const modalActivee = ref(false);
+        const modalActivee = ref(false);
 
-    const toggleModal2 = () => {
-      modalActivee.value = !modalActivee.value;
-    };
+        const toggleModal2 = () => {
+            console.log(modalActivee.value)
+            modalActivee.value = !modalActivee.value;
+        };
 
-    return { modalActivee, toggleModal2 };
-  },
+        return { modalActivee, toggleModal2 };
+    },
 }
 </script>
 
