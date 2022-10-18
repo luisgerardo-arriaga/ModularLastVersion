@@ -1,13 +1,9 @@
 <template> 
       <div class="container text-center mt-2">
-        <div reg-c class="form-floating mb-3 mt-3 col-6" >
+        <div reg-c class="form-floating mb-3 mt-3 col-12" >
             <input type="text" class="form-control buscadorInput" id="floatingNombreCaseta" placeholder="Buscador" v-model="texto" @keyup="ejemplo">
             <label for="floatingNombreCaseta">Buscador</label>
         </div>   
-        <div class="input-group input-group-sm mb-3 col-6">
-          
-          < type="text" class="form-control" aria-label="Sizing example input" aria-describedby="inputGroup-sizing-sm"><span class="input-group-text" id="inputGroup-sizing-sm">Small</span></>
-        </div>     
         <div class="row">
             <div class="tabla col">
                 <table class="table table-striped">
