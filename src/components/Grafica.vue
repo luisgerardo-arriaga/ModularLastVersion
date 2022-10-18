@@ -63,7 +63,7 @@ import Chart from 'chart.js/auto';
             data: {
               labels: ['Sabado', 'Domingo', 'Lunes', 'Martes', 'Miercoles', 'Jueves', 'Viernes'], 
               datasets: [{
-                label: '# of Votes',
+                label: '',
                 data: this.totalHuevos,
                 backgroundColor: [
                   'rgba(0, 173, 181,  0.2)',
@@ -92,7 +92,7 @@ import Chart from 'chart.js/auto';
   }
   </script>
   
-  <style scoped>
+<style scoped>
   canvas{
     width: 500px;
     height: 500px;
@@ -101,4 +101,4 @@ import Chart from 'chart.js/auto';
     width: 400px;
     height: 500px;
   }
-  </style>
+</style>

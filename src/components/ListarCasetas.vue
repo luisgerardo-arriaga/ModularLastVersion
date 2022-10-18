@@ -39,11 +39,6 @@
                                     </div>
                                 </Modal2>
                                 <div >
-                                    <!-- <button title="Agregar Caseta" @click="toggleModal2" type="button" class="btn btnCrearCaseta">
-                                        <span id = "add" class="material-icons AgregarC">add</span>
-                                    </button> -->
-
-                                     <!-- <button class="btn btnDelete btn-danger ml-2 btn-sm buttonDelete" @click="deleteCasetas(item.id)"><span class="material-icons btnDeletespan">delete</span></button> -->
                                      <button class="btn btnDelete btn-danger ml-2 btn-sm buttonDelete" ><span  @click="toggleModal2" class="material-icons btnDeletespan">delete</span></button>
                                 </div>
                               <router-link class="btn btnEdit btn-warning ml-2 btn-sm buttonEdit" :to="{name:'Editar', params:{id: item.id}}"><span class="material-icons">edit</span></router-link>

@@ -171,10 +171,8 @@
                 </table>                
             </div>
             <div class="grafica col">
-                2 of 2
                 <!-- <Grafica :totalHuevos="totalHuevos" :option="option"/> -->
                 <canvas id="myChart"  width="400" height="500"></canvas>
-
             </div>
         </div>
     </div>
@@ -354,17 +352,19 @@ export default {
             data: {
               labels: ['Sabado', 'Domingo', 'Lunes', 'Martes', 'Miercoles', 'Jueves', 'Viernes'], 
               datasets: [{
-                label: '# of Votes',
+                label: 'Produccion Total x Dia',
                 data: this.totalHuevos,
                 backgroundColor: [
-                  'rgba(0, 173, 181,  0.2)',
+                  'rgba(0, 173, 181,  0.2)',    
                   'rgba(0, 0, 0, 0.2)',
-                  'rgba(196, 251, 107, 0.2)'
+                  'rgba(60, 40, 104,  0.2)',
+                  'rgba(249, 102, 102,  0.2)',                  
                 ],
                 borderColor: [
                   'rgba(0, 173, 181, 1)',
                   'rgba(0, 0, 0, 1)',
-                  'rgba(196, 251, 107, 1)'
+                  'rgba(60, 40, 104,  1)',                  
+                  'rgba(249, 102, 102,  1)',                  
                 ],
                 borderWidth: 1,
               }]
@@ -412,6 +412,7 @@ export default {
         
     }
     .grafica{
+        width: 200px;
         /* background-color: lightcoral; */
         margin-left: 1%;
     }
