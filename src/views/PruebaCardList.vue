@@ -1,21 +1,35 @@
 <template>
-  <div class="container">
-    <h1 class="text-center">Paises API</h1>
-    <Continentes />
-    <Buscador />
-    <CardList />
+  <div class="container text-center">
+  <div class="row">
+    <div class="col paisesCSS">
+      <h1>Paises API</h1>
+      <CardList />  
+    </div>
+    <div class="col alimentoCSS">
+      <h1>Alimento API</h1>
+      <CardAlimento />  
+    </div>
   </div>
+</div>
 </template>
 
 <script>
-import CardList from '../components/CardList'
-import Continentes from '../components/Continentes'
-import Buscador from '../components/Buscador'
-
+import CardList from '../components/CardList.vue'
+import CardAlimento from '../components/CardAlimento.vue'
 export default {
-  name: 'App',
   components: {
-    CardList, Continentes, Buscador
+    CardList, CardAlimento
   }
+
 }
 </script>
+
+<style scoped>
+.paisesCSS{
+  background-color: lightblue;
+}
+.alimentoCSS{
+  background-color: lightcoral;
+}
+
+</style>
