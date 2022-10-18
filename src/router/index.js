@@ -25,12 +25,6 @@ const routes = [
     meta: {rutaProtegida: true}
   },
   {
-    path: '/PruebaCardList',
-    name: 'PruebaCardList',
-    component: () => import(/* webpackChunkName: "about" */ '../views/PruebaCardList.vue'),
-    meta: {rutaProtegida: true}
-  },
-  {
     path: '/alimento',
     name: 'Alimento',
     component: () => import(/* webpackChunkName: "about" */ '../views/Alimento.vue'),

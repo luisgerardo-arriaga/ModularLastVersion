@@ -21,11 +21,6 @@
                     Inventario
                 </router-link>
             </li>
-            <li class="nav-item mt-2">
-                <router-link to="/PruebaCardList"  class="nav-link navbar-brand">
-                    PRUEBA
-                </router-link>
-            </li>
             <li class="nav-item mt-2 settings">
                 <div class="dropdown">
                 <button class="btn botonSettings nav-link navbar-brand" type="button" id="dropdownMenuButton2" data-bs-toggle="dropdown" >

@@ -3,13 +3,6 @@ import router from '../router'
 
 export default createStore({
   state: {
-    paises: [],
-    paisesFiltrados: [],
-
-    alimentos:[],
-    alimentosFiltrados:[],
-
-
     casetas: [],
     caseta: {
       id: '',
@@ -76,18 +69,7 @@ export default createStore({
     error: {tipo: null, mensaje: null}
   },
   mutations: {
-    setPaises(state, payload){
-      state.paises = payload
-    },
-    setPaisesFiltrados(state, payload){
-      state.paisesFiltrados = payload
-    },
-    setAlimentos(state, payload){
-      state.alimentos = payload
-    },
-    setAlimentosFiltrados(state, payload){
-      state.AlimentosFiltrados = payload
-    },
+    
 
     //datos inventario inicio
     setInventario(state, payload){
@@ -229,12 +211,44 @@ export default createStore({
       localStorage.setItem('produccionDiaria', JSON.stringify(state.produccionDiaria))     
       router.push('/formulas')
     },
+
+    setPaises(state, payload){
+      state.paises = payload
+    },
+    setPaisesFiltrados(state, payload){
+      state.paisesFiltrados = payload
+    },
+    setAlimentos(state, payload){
+      state.alimentos = payload
+    },
+    setAlimentosFiltrados(state, payload){
+      state.AlimentosFiltrados = payload
+    },
   },
   
   actions: {
-    async getPaises({commit}){
+    async getPaises({ commit }){
       try {
-        const res = await fetch        
+        const res = await fetch('api.json')        
+        const data = await res.json()
+        // console.log(data)
+        commit('setPaises', data)
+      } catch (error) {
+        console.log(error)
+      }
+    },
+
+    // alimento
+    async getAlimentos({ commit }){
+      try {
+        const res = await fetch('api2.json')        
+        const data = await res.json()
+        const array = []
+        for(let id in data){
+          array.push(data[id])          
+        }  
+        console.log(array)
+        commit('setAlimentos', array)
       } catch (error) {
         console.log(error)
       }
