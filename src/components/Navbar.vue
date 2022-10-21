@@ -1,4 +1,5 @@
 <template>
+    <h1>hpña mundo</h1>
 <nav v-if="usuarioAutenticado" class="navbar-dark bg-dark p-3 nava" type="dark">
   <ul class="nav justify-content-center">
             <li class="nav-item mt-2">
