@@ -1,8 +1,7 @@
 <template> 
       <div class="container text-center mt-2">
-        <div reg-c class="form-floating mb-3 mt-3 col-12" >
-            <input type="text" class="form-control buscadorInput" id="floatingNombreCaseta" placeholder="Buscador" v-model="texto" @keyup="ejemplo">
-            <label for="floatingNombreCaseta">Buscador</label>
+        <div reg-c class="mb-3 mt-3 col-3" >
+            <input type="text" class="form-control buscadorInput" placeholder="Buscar por producto o etapa" v-model="texto" @keyup="ejemplo">            
         </div>   
         <div class="row">
             <div class="tabla col">
@@ -15,7 +14,7 @@
                             <th scope="col">Fecha</th>
                         </tr>
                     </thead>
-                    <tbody v-if="arrayFiltro.length == 0">
+                    <tbody v-if="texto.length == 0">
                         <tr v-for="item in datosFormulas" :key="item.id">
                             <th scope="row">{{item.toneladas}}</th>
                             <th scope="row">{{item.etapaFormulaDat}}</th> 
@@ -56,8 +55,7 @@ export default {
       if(this.texto != ''){
         this.arrayFiltro = []
         this.datosFormulas.forEach(element => {
-          if(element.etapaFormulaDat.includes(this.texto) | element.fecha.includes(this.texto)){
-            console.log(element) 
+          if(element.etapaFormulaDat.includes(this.texto) | element.fecha.includes(this.texto)| element.productos.includes(this.texto)){             
             this.arrayFiltro.push(element) 
           }
         });
@@ -71,8 +69,9 @@ export default {
   created(){
     this.cargarDBinventario()
     this.cargarDBDatosFormulas()  
-    this.arrayFiltro = this.datosFormulas
+    this.arrayFiltro = this.datosFormulas        
   },
+  
 
 }
 </script>

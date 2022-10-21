@@ -172,7 +172,7 @@
             </div>
             <div class="grafica col">
                 <!-- <Grafica :totalHuevos="totalHuevos" :option="option"/> -->
-                <canvas id="myChart"  width="400" height="500"></canvas>
+                <canvas id="myChart"></canvas>
             </div>
         </div>
     </div>

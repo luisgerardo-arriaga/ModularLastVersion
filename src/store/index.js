@@ -227,32 +227,6 @@ export default createStore({
   },
   
   actions: {
-    async getPaises({ commit }){
-      try {
-        const res = await fetch('api.json')        
-        const data = await res.json()
-        // console.log(data)
-        commit('setPaises', data)
-      } catch (error) {
-        console.log(error)
-      }
-    },
-
-    // alimento
-    async getAlimentos({ commit }){
-      try {
-        const res = await fetch('api2.json')        
-        const data = await res.json()
-        const array = []
-        for(let id in data){
-          array.push(data[id])          
-        }  
-        console.log(array)
-        commit('setAlimentos', array)
-      } catch (error) {
-        console.log(error)
-      }
-    },
 
     //Actions inventarios inicio
     async cargarDBinventario({ commit, state }){
@@ -290,7 +264,7 @@ export default createStore({
         for(let id in dataEGGDB){
           array.push(dataEGGDB[id])          
         }  
-        console.log(array)
+        // console.log(array)
         commit('cargarDatosFormulas', array)
         
       } catch (error) {

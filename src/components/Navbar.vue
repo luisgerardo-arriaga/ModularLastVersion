@@ -30,8 +30,6 @@
                 </button>
                 <ul class="dropdown-menu dropdown-menu-dark" aria-labelledby="dropdownMenuButton2">
                     <li><a class="dropdown-item" href="/formulas">Formulas</a></li>
-                    <li><a class="dropdown-item" href="#">Another action</a></li>
-                    <li><a class="dropdown-item" href="#">Something else here</a></li>
                     <li><hr class="dropdown-divider"></li>
                     <li><a class="dropdown-item" href="#" v-if="usuarioAutenticado" @click="cerrarSesion">Cerrar sesión</a></li>
                 </ul>
