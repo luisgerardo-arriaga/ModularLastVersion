@@ -2,7 +2,9 @@
   <div id="nav">
     <Navbar style="z-index:100;"/>
   </div>
-  <router-view/>
+  <div id="rout">
+    <router-view/>
+  </div>
 </template>
 
 <script>
@@ -30,8 +32,14 @@ export default {
   -moz-osx-font-smoothing: grayscale;
   text-align: center;
   color: #2c3e50;  
+  /* background-color: red; */
 }
 #nav a.router-link-exact-active {
   color: #00ADB5;
+}
+#rout{
+  display: block;
+  overflow-x: auto;
+  white-space: nowrap;
 }
 </style>

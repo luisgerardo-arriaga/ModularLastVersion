@@ -107,6 +107,11 @@ const routes = [
     component: () => import(/* webpackChunkName: "about" */ '../views/Formulas.vue'),
     meta: {rutaProtegida: true}
   },
+  { 
+    path: '/:pathMatch(.*)*', 
+    name: 'E404',
+    component: () => import('../views/E404.vue')
+  },
 ]
 
 
