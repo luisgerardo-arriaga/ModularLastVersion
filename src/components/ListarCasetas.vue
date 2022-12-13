@@ -38,7 +38,7 @@
                                             </button>
                                         </div>
                                     </div>
-                                </Modal2>
+                                </Modal2>  
                                 <div >
                                     <button @click="prDelete(item.id, item.nombreCaseta)" class="btn btnDelete btn-danger ml-2 btn-sm buttonDelete" >
                                         <span  @click="toggleModal2"  class="material-icons btnDeletespan">delete</span>

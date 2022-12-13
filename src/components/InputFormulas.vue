@@ -1,5 +1,5 @@
 <template> 
-    <h2>Registro de nueva fomrula </h2>
+    <h2>Registro de nueva formula </h2>
     <div id="alert-nuevo" class="alert-danger mb-3 mt-3 col-5 " v-show="validarSalida">
         {{this.strSalida}}
     </div>
