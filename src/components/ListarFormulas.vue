@@ -19,7 +19,7 @@
                               <Modal2 @close="toggleModal2" :modalActive="modalActivee">
                                 <div class="ingresocaseta container">
                                 <h4 style="color: white">
-                                    Se eliminara la formula {{item.nombreFormula}}
+                                    Se eliminara la formula {{this.deleteNCaseta}}
                                     ¿Desea continuar?
                                 </h4>
                                 <span class="material-symbols-outlined" id="icon-delete">
@@ -27,7 +27,7 @@
                                 </span>
 
                                 <div id="con-btdt">
-                                    <button id="" class="delete-m btn btnSi btn-danger ml-2 btn-sm buttonDelete" @click="deleteFormulas(item.id),toggleModal2()">
+                                    <button id="" class="delete-m btn btnSi btn-danger ml-2 btn-sm buttonDelete" @click="deleteFormulas(this.deleteId),toggleModal2()">
                                     <span id ="" class="icon-palo material-symbols-outlined">task_alt</span>
                                     </button>
                                     <button id="no" class="delete-m btn btnDelete btn-danger ml-2 btn-sm buttonDelete" @click="toggleModal2">
@@ -37,7 +37,7 @@
                                 </div>
                             </Modal2>
                             <div >
-                                    <button class="btn btnDelete btn-danger ml-2 btn-sm buttonDelete" ><span  @click="toggleModal2" class="material-icons btnDeletespan">delete</span></button>
+                                    <button @click="prDelete(item.id, item.nombreFormula)" class="btn btnDelete btn-danger ml-2 btn-sm buttonDelete" ><span  @click="toggleModal2" class="material-icons btnDeletespan">delete</span></button>
                             </div>
                               <!-- <button class="btn btnDelete btn-danger ml-2 btn-sm buttonDelete" @click="deleteFormulas(item.id)"><span class="material-icons btnDeletespan">delete</span></button> -->
                           </div>
@@ -54,6 +54,12 @@ import Modal2 from "@/components/Modal2.vue";
 import { ref } from "vue";
 
 export default {
+    data(){
+        return  {
+            deleteId:"",
+            deleteNCaseta:"",
+        }
+    },
     components: {
         Modal2,
     },
@@ -61,6 +67,10 @@ export default {
         ...mapState(['formulas', 'datosFormulas'])
     },
     methods: {
+        prDelete(dId, dNCaseta){
+            this.deleteId = dId
+            this.deleteNCaseta = dNCaseta
+        },
         ...mapActions(['deleteFormulas', 'deleteFormulasDatos']),
     },
     
