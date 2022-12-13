@@ -8,7 +8,7 @@
                 <table class="table table-striped">
                     <thead>
                         <tr>
-                            <th scope="col">Toneladas</th>
+                            <th scope="col">Kilogramos</th>
                             <th scope="col">Etapa</th>
                             <th scope="col">Productos</th>
                             <th scope="col">Fecha</th>
