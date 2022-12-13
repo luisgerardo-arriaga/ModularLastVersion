@@ -14,7 +14,6 @@
                     <p class="card-text fw-bold text-start"><strong>Etapa: </strong>{{ item.etapaCaseta }}</p>
                     <p class="card-text fw-bold text-start"><strong>Encargado: </strong>{{ item.encargadoCaseta }}</p>
                 </router-link>
-                {{item.nombreCaseta}}
                           <div class="divBotones">
                                 <Modal2 @close="toggleModal2" :modalActive="modalActivee">
                                     <div class="ingresocaseta container">
