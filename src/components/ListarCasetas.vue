@@ -10,16 +10,17 @@
                       </router-link>
                       <div class="card-body tarjetaBody">
                 <router-link class="router-casPo" :to="{name:'IngresoCasetaProduccion', params:{id: item.id}}">
-                          <p class="card-text fw-bold text-start"><strong>Gallinas: </strong>{{ item.numeroGallinas }}</p>
-                          <p class="card-text fw-bold text-start"><strong>Etapa: </strong>{{ item.etapaCaseta }}</p>
-                          <p class="card-text fw-bold text-start"><strong>Encargado: </strong>{{ item.encargadoCaseta }}</p>
-                      </router-link>
+                    <p class="card-text fw-bold text-start"><strong>Gallinas: </strong>{{ item.numeroGallinas }}</p>
+                    <p class="card-text fw-bold text-start"><strong>Etapa: </strong>{{ item.etapaCaseta }}</p>
+                    <p class="card-text fw-bold text-start"><strong>Encargado: </strong>{{ item.encargadoCaseta }}</p>
+                </router-link>
+                {{item.nombreCaseta}}
                           <div class="divBotones">
-
                                 <Modal2 @close="toggleModal2" :modalActive="modalActivee">
                                     <div class="ingresocaseta container">
                                     <h4 style="color: white">
-                                        Se eliminara la caseta {{item.nombreCaseta}}
+                                        <!-- Se eliminara la caseta {{item.nombreCaseta}} -->
+                                        Se eliminara la caseta {{this.deleteNCaseta}}
                                         ¿Desea continuar?
                                     </h4>
                                     
@@ -28,7 +29,7 @@
                                     </span>
 
                                         <div id="con-btdt">
-                                            <button id="" class="delete-m btn btnSi btn-danger ml-2 btn-sm buttonDelete" @click="deleteCasetas(item.id), toggleModal2()">
+                                            <button id="" class="delete-m btn btnSi btn-danger ml-2 btn-sm buttonDelete" @click="deleteCasetas(this.deleteId), toggleModal2()">
                                                 <span id ="" class="icon-palo material-symbols-outlined">task_alt</span>
                                             </button>
 
@@ -39,7 +40,9 @@
                                     </div>
                                 </Modal2>
                                 <div >
-                                     <button class="btn btnDelete btn-danger ml-2 btn-sm buttonDelete" ><span  @click="toggleModal2" class="material-icons btnDeletespan">delete</span></button>
+                                    <button @click="prDelete(item.id, item.nombreCaseta)" class="btn btnDelete btn-danger ml-2 btn-sm buttonDelete" >
+                                        <span  @click="toggleModal2"  class="material-icons btnDeletespan">delete</span>
+                                    </button>
                                 </div>
                               <router-link class="btn btnEdit btn-warning ml-2 btn-sm buttonEdit" :to="{name:'Editar', params:{id: item.id}}"><span class="material-icons">edit</span></router-link>
                           </div>
@@ -56,6 +59,12 @@ import { ref } from "vue";
 import Modal2 from "@/components/Modal2.vue";
 
 export default {
+    data(){
+        return  {
+            deleteId:"",
+            deleteNCaseta:"",
+        }
+    },
     components: {
         Modal2,
     },
@@ -63,7 +72,10 @@ export default {
         ...mapState(['casetas'])
     },
     methods: {
-
+        prDelete(dId, dNCaseta){
+            this.deleteId = dId
+            this.deleteNCaseta = dNCaseta
+        },
         ...mapActions(['deleteCasetas'])
     },
     setup() {
